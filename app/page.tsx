@@ -44,7 +44,7 @@ export default function Home() {
         
       </div>
      <section className="px-20 flex flex-col gap-5  items-center">
-     <h1 className="mx-auto text-center text-neutral-800 text-5xl font-extrabold  w-1/2">Manage Your Expenses Anywhere in Real Time</h1>
+     <h1 className="mx-auto text-center text-neutral-800 text-5xl font-bold  w-1/2 leading-tight">Manage Your Expenses Anywhere in Real Time</h1>
      <p className="text-sm w-3/4 mx-auto text-center text-neutral-800/80">Embark on a journey of financial empowerment with our cutting-edge expense tracker. Precision meets simplicity as every transaction finds purpose in our intuitive platform. Seamlessly navigate your expenses, charting a course towards financial brilliance. Crafted for those who seek meticulous budgeting and smart spending, our app transforms every cent into a strategic step towards long-term prosperity. Elevate your financial IQ – where precision tracking meets masterful living.</p>
      <Button variant={"primary"} size={"lg"} className="w-fit shadow-lg shadow-blue-400/80 ">Request a Demo</Button>
      </section>

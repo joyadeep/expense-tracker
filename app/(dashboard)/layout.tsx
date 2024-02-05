@@ -16,7 +16,7 @@ const Layout = ({children}:{children:React.ReactNode}) => {
             <div className={`overflow-y-auto overflow-x-hidden ${isOpen ? "w-[250px]":"w-16"}  transition-all duration-300 `}>
                 <Sidenav isOpen={isOpen}/>
             </div>
-            <div className="  overflow-y-auto bg-slate-100 rounded-lg w-full p-2 mb-2 ">
+            <div className="  overflow-y-auto bg-white  w-full px-6 mb-2 ">
                 {children}
             </div>
             </div>

@@ -42,7 +42,9 @@ const data = [
 
 const Chart =()=> {
   return (
-    <ResponsiveContainer width="100%" height="100%">
+   <div className='w-full h-full'>
+    <h2 className='font-semibold text-black/70 text-md pl-2 pb-2'>Income and Expense graph</h2>
+     <ResponsiveContainer width="100%" height="100%">
     <LineChart
       width={500}
       height={300}
@@ -59,10 +61,11 @@ const Chart =()=> {
       <YAxis />
       <Tooltip />
       <Legend />
-      <Line type="monotone" dataKey="expense" stroke="#8884d8" activeDot={{ r: 8 }} />
-      <Line type="monotone" dataKey="income" stroke="#82ca9d" />
+      <Line type="monotone" dataKey="expense" stroke="#9A0928" activeDot={{ r: 8 }} />
+      <Line type="monotone" dataKey="income" stroke="#2C9A09" />
     </LineChart>
   </ResponsiveContainer>
+   </div>
   )
 }
 
