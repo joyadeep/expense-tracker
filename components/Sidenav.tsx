@@ -23,7 +23,7 @@ const Sidenav = ({isOpen}:{isOpen:boolean}) => {
     }
   ]
   return (
-    <div className={`px-2`}>
+    <div className="px-2 border-r h-full shadow-md ">
       <h1 className="font-semibold text-md text-slate-700 mb-5">Admin</h1>
       <div className="relative flex flex-col gap-2">
         {

@@ -8,7 +8,7 @@ interface IHeader {
 
 const Header = ({toggleOpen}:IHeader) => {
   return (
-    <header className={` w-full sticky top-0 flex justify-between items-center px-5 py-3 h-16 bg-background`}>
+    <header className={` w-full sticky top-0 flex justify-between items-center border-b px-5 py-3 h-16 bg-background`}>
         <div className="flex items-center gap-2 text-foreground">
         <AlignRight onClick={toggleOpen} className="cursor-pointer" size={24} />
         <div className="text-foreground">Logo</div>
