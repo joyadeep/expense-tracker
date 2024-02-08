@@ -23,6 +23,6 @@ export const GET = async(req:NextRequest,{params}:{params:{userId:string}})=>{
         }
         return NextResponse.json({message:"success",currentPage:pageNumber,totalPages:totalPages,data:response},{status:200})
     } catch (error) {
-        return NextResponse.json({message:"something went wrong"},{status:500})
+        return NextResponse.json({message:"something went wrong",error:error},{status:500})
     }
 }
