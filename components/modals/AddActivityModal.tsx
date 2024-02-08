@@ -14,12 +14,30 @@ import { toast } from 'sonner'
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
 import { useActivity } from '@/hooks/useActivity'
 
+// TODO : when activity is added all other pages should be refetched.
 
 const formSchema=z.object({
   title:z.string().min(1,{message:"Title is required"}),
   amount:z.coerce.number().min(1,{message:"Amount is required"}),
   category:z.nativeEnum(Category)
 })
+const categories = {
+  HOUSING_EXPENSES: "Housing Expenses",
+  TRANSPORTATION_COSTS: "Transportation Costs",
+  FOOD_AND_DINING: "Food and Dining",
+  HEALTHCARE: "Healthcare",
+  UTILITIES: "Utilities",
+  ENTERTAINMENT: "Entertainment",
+  PERSONAL_CARE: "Personal Care",
+  EDUCATION: "Education",
+  DEBTS_AND_LOANS: "Debts and Loans",
+  CLOTHING_AND_ACCESSORIES: "Clothing and Accessories",
+  TRAVEL: "Travel",
+  GIFTS_AND_DONATIONS: "Gifts and Donations",
+  SAVINGS_AND_INVESTMENTS: "Savings and Investments",
+  PETS: "Pets",
+  MISCELLANEOUS: "Miscellaneous"
+};
 
 const AddActivityModal = () => {
 
@@ -31,7 +49,7 @@ const AddActivityModal = () => {
     defaultValues:{
       title:"",
       amount:0,
-      category:Category.FOOD
+      category:Category.ENTERTAINMENT
     }
   })
 
@@ -40,6 +58,7 @@ const AddActivityModal = () => {
 
   const onSubmit = async(values:z.infer<typeof formSchema>)=>{
     try {
+      console.log(values);
       const activityData= {...values,userId:localStorage.getItem("userId")};
       
       await addActivity(activityData);
@@ -110,11 +129,9 @@ const AddActivityModal = () => {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
-                      {
-                        Object.values(Category).map((category)=>(
-                          <SelectItem key={category} value={category} className='capitalize'>{category}</SelectItem>
-                        ))
-                      }
+                      {Object.entries(categories).map(([key, value]) => (
+                        <SelectItem key={key} value={key}>{value}</SelectItem>
+                      ))}
                     </SelectGroup>
                   </SelectContent>
                 </Select>
