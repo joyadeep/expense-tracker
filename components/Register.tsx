@@ -37,6 +37,7 @@ function Register() {
     const onSubmit = async(values:Z.infer<typeof formSchama>)=>{
         try {
             const response = await axios.post("/api/register",values);
+            console.log("register response =",response);
             if (response.status!==201) {
                 throw new Error(response.data.message)
             }
