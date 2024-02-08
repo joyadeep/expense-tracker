@@ -8,13 +8,12 @@ import { currencyFormat } from '@/lib/currency';
 import { useEffect } from 'react';
 
 const Report = () => {
-    const {data,getActivity,pagedData,getPagedActivity}= useActivity();
+    const {pagedData,getPagedActivity}= useActivity();
     useEffect(()=>{
-        if(data.length === 0){
+        if(pagedData.length === 0){
             getPagedActivity(1);
         }
     },[])
-    console.log(pagedData);
 
   return (
     <div className=''>
