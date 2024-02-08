@@ -8,6 +8,7 @@ import Link from 'next/link'
 import { useModal } from '@/hooks/useModal'
 import { useActivity } from '@/hooks/useActivity'
 import { Skeleton } from './ui/skeleton'
+import { categoryConstant } from '@/constants/CategoryConstant'
 
 
 const RecentActivities = () => {
@@ -42,9 +43,9 @@ const RecentActivities = () => {
           ))
           :
           data.map((activity,index)=>(
-            <div key={index} className='px-5 flex justify-between gap-5 items-center py-2  hover:bg-slate-100 cursor-pointer'>
-            <div className='flex justify-center items-center w-8 h-8 text-teal-600  rounded-full bg-black'>
-              <DollarSign/>
+            <div key={index} className='px-5 flex justify-between gap-5 items-center py-2  hover:bg-black/5 cursor-pointer'>
+            <div className='flex justify-center items-center w-8 h-8 text-black  rounded-full bg-black/10'>
+              {categoryConstant[activity.category]}
             </div>
             <div className='flex-1'>
               <p className='text-sm text-black first-letter:capitalize'>{activity.title}</p>

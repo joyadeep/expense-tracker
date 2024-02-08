@@ -13,8 +13,10 @@ import { Category } from '@prisma/client'
 import { toast } from 'sonner'
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
 import { useActivity } from '@/hooks/useActivity'
+import { categoryConstant } from '@/constants/CategoryConstant'
 
 // TODO : when activity is added all other pages should be refetched.
+// TODO : add icons to category if possible
 
 const formSchema=z.object({
   title:z.string().min(1,{message:"Title is required"}),
@@ -130,7 +132,11 @@ const AddActivityModal = () => {
                   <SelectContent>
                     <SelectGroup>
                       {Object.entries(categories).map(([key, value]) => (
-                        <SelectItem key={key} value={key}>{value}</SelectItem>
+                        <SelectItem key={key} value={key}>
+                          <span className='flex gap-2 items-center'>
+                          {categoryConstant[key]} {value}
+                          </span>
+                        </SelectItem>
                       ))}
                     </SelectGroup>
                   </SelectContent>
