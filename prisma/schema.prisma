@@ -20,6 +20,7 @@ enum Category {
   TRANSPORTATION
   OUTING
   FOOD
+  OTHERS
 }
 
 model Users{

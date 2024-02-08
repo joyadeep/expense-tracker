@@ -4,17 +4,24 @@ import { useForm } from 'react-hook-form';
 import * as Z from 'zod';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import axios from "axios";
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import Link from 'next/link';
 
+// TODO : use username instead of email also change in api.
 
 const formSchama = Z.object({
-    email:Z.string({required_error:"Email is required"}).email(),
-    password:Z.string({required_error:"Password is required"}).min(6)
+    email:Z.string().email({message:"Email is required"}),
+    password:Z.string().min(6,{message:"Password must be atelese 6 character long"}).max(20,{message:"Password must be less than 20 characters"}),
 })
 
 
 const Login = () => {
+    const [isLogging,setIsLogging]=useState(false);
+    const router=useRouter();
 
     const form = useForm<Z.infer<typeof formSchama>>({
         resolver:zodResolver(formSchama),
@@ -24,15 +31,27 @@ const Login = () => {
         }
     })
 
-    const onSubmit = (values:Z.infer<typeof formSchama>)=>{
-        console.log(values);
+    const onSubmit = async(values:Z.infer<typeof formSchama>)=>{
+        try {
+            setIsLogging(true);
+            const response = await axios.post("/api/login",values);
+            const {data,token}=response.data;
+            localStorage.setItem("userId",data.id);
+            localStorage.setItem("expense_tracker_token",token);
+            router.push("/dashboard");
+        } catch (error:any) {
+            console.log(error.response.data.message);
+        } finally {
+            setIsLogging(false);
+        }
     }
 
 
   return (
     <Card className=' w-full border-none shadow-none mx-3'>
         <CardHeader className='text-center '>
-            <CardTitle className='text-3xl font-bold '>Auth<span className='text-rose-500'>.</span></CardTitle>
+            <CardTitle className='text-3xl font-bold '>Login<span className='text-rose-500'>.</span></CardTitle>
+            <CardDescription className='text-black/80 text-md tracking-normal'>Welcome Back</CardDescription>
         </CardHeader>
         <CardContent>
         <Form {...form}>
@@ -48,8 +67,6 @@ const Login = () => {
                             <Input type='email' placeholder='Enter your email' {...field} />
                         </FormControl>
                     </FormItem>
-                    
-                    
                     </div>
                 ) 
             } />
@@ -70,9 +87,13 @@ const Login = () => {
                 ) 
             } />
 
-            <Button variant={"primary"} type="submit">Login</Button>
+            <Link href="/#" className='text-xs text-blue-500 hover:underline hover:underline-offset-4 self-end'>Forgot Password?</Link>
+
+            <Button variant={"primary"} disabled={isLogging} type="submit">Login</Button>
 
             </form>
+            <p className='text-sm mt-3 text-center'>New to tracker ?  <Link href={"/auth?type=register"} className='text-blue-500 hover:underline hover:underline-offset-4'>Register</Link> </p>
+           
 
         </Form>
         </CardContent>

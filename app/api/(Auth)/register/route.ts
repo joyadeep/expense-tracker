@@ -8,9 +8,14 @@ export const POST = async (req:Request)=>{
         if(!username || !email || !password){
             return NextResponse.json({message:"Missing fields"},{status:400});
         }
-        const checkuser = await db.users.findFirst({where:{email}});
-        if(checkuser?.email === email || checkuser?.username === username)
-            return NextResponse.json({message:"User already exists"},{status:409});
+
+        const  existingUsername = await prisma?.users.findUnique({where:{username}});
+        if (existingUsername?.username === username)
+            return NextResponse.json({message:"Username already taken"},{status:409});
+
+        const existingEmail = await prisma?.users.findUnique({where:{email}});
+        if (existingEmail?.email === email)
+            return NextResponse.json({message:"Email already taken"},{status:409});
         
         const salt = bcrypt.genSaltSync(10);
         const hashedPassword = await bcrypt.hash(password,salt);

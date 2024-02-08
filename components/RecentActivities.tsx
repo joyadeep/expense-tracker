@@ -1,39 +1,63 @@
 "use client"
 import { currencyFormat } from '@/lib/currency'
 import { DollarSign, Plus } from 'lucide-react'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Button } from './ui/button'
 import TooltipAction from './TooltipAction'
 import Link from 'next/link'
 import { useModal } from '@/hooks/useModal'
+import { useActivity } from '@/hooks/useActivity'
+import { Skeleton } from './ui/skeleton'
 
 
 const RecentActivities = () => {
+  const {data,getActivity,error,isLoading}=useActivity();
   const {onOpen} = useModal()
+  useEffect(()=>{
+    if(data.length === 0){
+        getActivity();
+    }
+  },[getActivity])
   return (
-    <div>
-        <div className='flex justify-between items-center px-2'>
-        <h5 className='font-semibold text-black/60'>Recent Activities</h5>
+    <div className=' h-[400px] relative overflow-hidden flex flex-col'>
+        <div className='px-5 flex justify-between items-center '>
+        <h5 className='font-semibold text-black tracking-tight'>Recent Activities</h5>
         <TooltipAction label='Add Activity' side='left' align='center' condition>
-            <Button variant={"outline"} size={"icon"} onClick={()=>onOpen("Add Activity")}><Plus/></Button>
+            <Button variant={"ghost"} size={"icon"} onClick={()=>onOpen("Add Activity")}><Plus/></Button>
         </TooltipAction>
         </div>
-        <div>
-           {Array.from({length:6}).map((_,index)=>(
-                <div key={index} className='flex justify-between items-center py-2 px-1 hover:bg-slate-100 cursor-pointer'>
-                <div className='w-6 h-6'>
-                <DollarSign/>
-                </div>
-                <p className='text-sm'>Bought 3kg apple</p>
-                <p className='font-semibold text-sm'>{currencyFormat(600)}</p>
+        <div className='flex-1 overflow-hidden after:absolute after:bottom-7 after:left-0 after:w-full after:h-[80px] z-20 after:bg-gradient-to-t after:from-white/90'>
+          {error ? 
+          <p className='text-center text-black/60 text-sm mt-10'>{error}</p> 
+          :isLoading ? 
+          Array.from({length:7}).map((_,index)=>(
+            <div key={index} className='px-5 flex justify-between gap-5 items-center py-2'>
+            <Skeleton className='bg-black/30 w-8 h-8 rounded-full'/>
+            <div className='flex-1'>
+             <Skeleton className=' bg-black/30 w-full h-3 rounded-md'/>
+              <Skeleton className='bg-black/30 w-16 h-2 rounded-md mt-1'/>
             </div>
-           ))}
-          
-
+           <Skeleton className='bg-black/30 w-14 h-5 rounded-md'/>
         </div>
-        <div className='text-center text-blue-400 text-sm mt-4 ' >
+          ))
+          :
+          data.map((activity,index)=>(
+            <div key={index} className='px-5 flex justify-between gap-5 items-center py-2  hover:bg-slate-100 cursor-pointer'>
+            <div className='flex justify-center items-center w-8 h-8 text-teal-600  rounded-full bg-black'>
+              <DollarSign/>
+            </div>
+            <div className='flex-1'>
+              <p className='text-sm text-black first-letter:capitalize'>{activity.title}</p>
+              <p className='text-xs text-black/50'>{ new Date(activity.createdAt).toDateString()}</p>
+            </div>
+            <p className='font-semibold text-sm'>{currencyFormat(activity.amount)}</p>
+        </div>
+       ))
+          }
+        </div>
+        <div className='text-center text-blue-400 text-sm mt-auto pb-2 ' >
         <Link href={"#"}>
-            see all activities
+            see all expenses
         </Link>
         </div>
     </div>

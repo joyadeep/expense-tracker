@@ -1,73 +1,44 @@
-// import PageHeading from '@/components/PageHeading'
+"use client"
+import PageHeading from '@/components/Heading'
 import { Button } from '@/components/ui/button';
 import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '@/components/ui/pagination'
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from '@/components/ui/table'
-import {roomStatusConstant} from '@/constants/AmountConstant';
-// import { useModal } from '@/hooks/useModal';
+import { useActivity } from '@/hooks/useActivity';
 import { currencyFormat } from '@/lib/currency';
+import { useEffect } from 'react';
 
 const Report = () => {
-    // TODO : description also might need.
-    const rooms = [
-        {
-            id:1,
-            name:"1BHK",
-            location:"Boudha",
-            price:18000,
-            status:"available",
-            bathroom:"attached",
-            eligible:"family"
-        },
-        {
-            id:2,
-            name:"1 room, 1 kitchen",
-            location:"New Baneshwor",
-            price:12000,
-            status:"booked",
-            bathroom:"shared",
-            eligible:"2 people"
-        },
-        {
-            id:3,
-            name:"1 room",
-            location:"Kupandol",
-            price:7000,
-            status:"pending",
-            bathroom:"shared",
-            eligible:"anyone"
+    const {data,getActivity,pagedData,getPagedActivity}= useActivity();
+    useEffect(()=>{
+        if(data.length === 0){
+            getPagedActivity(1);
         }
-    ]
-    // const {activeModal} = useModal();
+    },[])
+    console.log(pagedData);
+
   return (
-    <div>
-        {/* <PageHeading title='Room Page' /> */}
+    <div className=''>
+         {/*  // TODO : pagination, filter and page is getting extra scrollbar when extra div or heading is added */}
         
         <div className='bg-white rounded-md w-full p-2'>
-        <Button variant={'default'} className='w-fit bg-blue-500 hover:bg-blue-500/90' size={'sm'}  >Add room</Button>
         <Table>
             <TableHeader>
                 <TableRow className=''>
                     <TableHead>#</TableHead>
-                    <TableHead>Name</TableHead>
-                    <TableHead>Location</TableHead>
-                    <TableHead>Status</TableHead>
-                    <TableHead>Bathroom</TableHead>
-                    <TableHead>Eligibile</TableHead>
-                    <TableHead>Price</TableHead>
+                    <TableHead>Title</TableHead>
+                    <TableHead>Category</TableHead>
+                    <TableHead>Amount</TableHead>
                     <TableHead>Action</TableHead>
                 </TableRow>
             </TableHeader>
             <TableBody>
                 {
-                    rooms.map((room)=>(
-                        <TableRow key={room.id}>
-                            <TableCell>{room.id}</TableCell>
-                            <TableCell>{room.name}</TableCell>
-                            <TableCell>{room.location}</TableCell>
-                            <TableCell>{roomStatusConstant[room.status]}</TableCell>
-                            <TableCell>{room.bathroom}</TableCell>
-                            <TableCell className='font-medium'>{room.eligible}</TableCell>
-                            <TableCell className='font-semibold'>{currencyFormat(room.price)}</TableCell>
+                    pagedData.map((expense,index)=>(
+                        <TableRow key={expense.id}>
+                            <TableCell>{index+1}</TableCell>
+                            <TableCell>{expense.title}</TableCell>
+                            <TableCell>{expense.category}</TableCell>
+                            <TableCell className='font-semibold'>{currencyFormat(expense.amount)}</TableCell>
                             <TableCell>---</TableCell>
                         </TableRow>
                     ))
@@ -98,6 +69,7 @@ const Report = () => {
         </PaginationItem>
             </PaginationContent>
         </Pagination>
+        
         </div>
     </div>
   )

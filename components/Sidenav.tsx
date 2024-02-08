@@ -7,25 +7,25 @@ const Sidenav = ({isOpen}:{isOpen:boolean}) => {
   const path = usePathname();
   const navitems = [
     {
-      title:"overview",
+      title:"Dashboard",
       icon:<LayoutGrid size={18}/>,
-      href:"/"
+      href:"/dashboard"
     },
     {
-      title:"payment",
+      title:"Login",
       icon:<Banknote size={18} />,
       href:"/auth"
     },
     {
-      title:"rooms",
+      title:"History",
       icon:<BedSingle size={18} />,
-      href:"/rooms"
+      href:"/history"
     }
   ]
   return (
     <div className="px-2 border-r h-full shadow-md ">
-      <h1 className="font-semibold text-md text-slate-700 mb-5">Admin</h1>
-      <div className="relative flex flex-col gap-2">
+      
+      <div className="relative flex flex-col gap-2 pt-5">
         {
           navitems.map((nav)=>(
             <TooltipAction label={nav.title} align='center' side='right' key={nav.title} condition={!isOpen}>

@@ -4,7 +4,7 @@ import Sidenav from "@/components/Sidenav"
 import { useState } from "react"
 
 const Layout = ({children}:{children:React.ReactNode}) => {
-    const [isOpen,setIsOpen]=useState(true);
+    const [isOpen,setIsOpen]=useState(false);
 
     const toggleOpen = ()=>{
         setIsOpen((preval)=>!preval)
@@ -16,7 +16,7 @@ const Layout = ({children}:{children:React.ReactNode}) => {
             <div className={`overflow-y-auto overflow-x-hidden ${isOpen ? "w-[250px]":"w-16"}  transition-all duration-300 `}>
                 <Sidenav isOpen={isOpen}/>
             </div>
-            <div className="  overflow-y-auto bg-white  w-full px-6 mb-2 ">
+            <div className="  overflow-y-auto bg-white  w-full px-10 pt-5 mb-2 ">
                 {children}
             </div>
             </div>

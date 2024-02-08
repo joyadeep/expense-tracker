@@ -9,13 +9,16 @@ try {
         return NextResponse.json({message:"Missing fields"},{status:400})
     }
     const user= await db.users.findFirst({where:{email}});
+
     if(!user){
         return NextResponse.json({message:"User not found"},{status:404})
     }
+
     const isPasswordCorrect = await bcrypt.compare(password,user.password);
     if(!isPasswordCorrect){
-        return NextResponse.json({message:"Invalid credentials"},{status:401})
+        return NextResponse.json({message:"Invalid credentials"},{status:400})
     }
+
     const token = jwt.sign({email},process.env.JWT_SECRET!);
     return NextResponse.json({message:"success",data:user,token:token},{status:200})
 
