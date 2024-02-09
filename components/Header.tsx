@@ -1,6 +1,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import {AlignRight, LogOut, Settings, UserRound} from 'lucide-react'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuTrigger } from "./ui/dropdown-menu";
+import Image from "next/image";
 
 interface IHeader {
   toggleOpen:()=>void;
@@ -11,7 +12,7 @@ const Header = ({toggleOpen}:IHeader) => {
     <header className={` w-full sticky top-0 flex justify-between items-center border-b px-5 py-3 h-16 bg-background`}>
         <div className="flex items-center gap-2 text-foreground">
         <AlignRight onClick={toggleOpen} className="cursor-pointer" size={24} />
-        <div className="text-foreground">Logo</div>
+        <Image alt="logo" src={"/logo.svg"} width={25} height={25} />
         </div>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>

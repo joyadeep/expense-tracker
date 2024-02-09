@@ -1,22 +1,43 @@
 "use client"
 import { useGraph } from '@/hooks/useGraph';
-import React, { useEffect } from 'react'
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, AreaChart, Area } from 'recharts';
+import React, { useEffect, useState } from 'react'
+import { XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area } from 'recharts';
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from './ui/select';
+// TODO : DayType is not accessible
+
 
 const Chart =()=> {
-  const {isLoading,yearlyGraph,getYearlyGraph} = useGraph();
+  const {isLoading,yearlyGraph,getYearlyGraph,dailyGraph} = useGraph();
+  const [time,setTime]=useState("DAILY")
   useEffect(()=>{
-    getYearlyGraph();
-  },[])
-  console.log(yearlyGraph)
+    if (yearlyGraph.length === 0 || dailyGraph.length === 0) {
+      getYearlyGraph(time)
+    }
+  },[time])
+  console.log(time)
   return (
-   <div className='w-full h-full'>
-    <h2 className='font-semibold text-black/70 text-md pl-2 pb-2'>Expense graph</h2>
-     <ResponsiveContainer width="100%" height="100%">
+   <div className='w-full h-[450px] border rounded-lg p-5'>
+    <div className='flex justify-between items-center'>
+      <h2 className='font-semibold text-black tracking-tight'>Expense graph</h2>
+      <div className='w-32'>
+      <Select value={time} onValueChange={(value)=>setTime(value)} >
+        <SelectTrigger>
+          <SelectValue placeholder="select time" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+              <SelectItem value="DAILY" >Daily</SelectItem>
+              <SelectItem value="MONTHLY" >Monthly</SelectItem>
+          </SelectGroup>
+        </SelectContent>
+      </Select>
+      </div>
+    </div>
+     <ResponsiveContainer width="100%" height="90%">
      <AreaChart
           width={500}
-          height={400}
-          data={yearlyGraph}
+          height={300}
+          data={time === "DAILY"? dailyGraph : yearlyGraph}
           margin={{
             top: 10,
             right: 30,

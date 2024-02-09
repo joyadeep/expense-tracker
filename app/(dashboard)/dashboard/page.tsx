@@ -21,10 +21,9 @@ const Dashboard = () => {
             <StatCard icon={<Wallet size={18} strokeWidth={2}/>} title='Total Expenses' amount={data.totalExpenses} />
             <StatCard icon={<Banknote size={18} strokeWidth={2}/>} title='Last Month' amount={data.lastMonthExpense} />
         </div>
-        <section className='flex gap-3 mt-5'>
-        <div className='w-2/3 h-[350px] bg-white rounded-lg py-2'>
+        <section className='flex gap-3 mt-5 '>
+        <div className='w-2/3 bg-white rounded-lg '>
         <Chart />
-        {/* <Piechart/> */}
         </div>
         <div className='border border-slate-200 rounded-md bg-white w-1/3 pt-2'>
           <RecentActivities/>

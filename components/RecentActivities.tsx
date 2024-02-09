@@ -1,6 +1,5 @@
 "use client"
 import { currencyFormat } from '@/lib/currency'
-import { DollarSign, Plus } from 'lucide-react'
 import React, { useEffect } from 'react'
 import { Button } from './ui/button'
 import TooltipAction from './TooltipAction'
@@ -9,6 +8,7 @@ import { useModal } from '@/hooks/useModal'
 import { useActivity } from '@/hooks/useActivity'
 import { Skeleton } from './ui/skeleton'
 import { categoryConstant } from '@/constants/CategoryConstant'
+import { Plus } from 'lucide-react'
 
 
 const RecentActivities = () => {
@@ -18,7 +18,7 @@ const RecentActivities = () => {
     if(data.length === 0){
         getActivity();
     }
-  },[getActivity])
+  },[getActivity,data.length])
   return (
     <div className=' h-[400px] relative overflow-hidden flex flex-col'>
         <div className='px-5 flex justify-between items-center '>
@@ -57,7 +57,7 @@ const RecentActivities = () => {
           }
         </div>
         <div className='text-center text-blue-400 text-sm mt-auto pb-2 ' >
-        <Link href={"#"}>
+        <Link href={"/history"}>
             see all expenses
         </Link>
         </div>

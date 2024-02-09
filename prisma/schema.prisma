@@ -10,9 +10,14 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum UserRole{
+enum UserRole {
   ADMIN
   USER
+}
+
+enum DayType {
+  DAILY
+  MONTHLY
 }
 
 enum Category {
@@ -32,6 +37,8 @@ SAVINGS_AND_INVESTMENTS
 PETS
 MISCELLANEOUS
 }
+
+
 
 model Users{
   id String @id @default(uuid())

@@ -36,7 +36,7 @@ const Report = () => {
                         <TableRow key={expense.id}>
                             <TableCell>{index+1}</TableCell>
                             <TableCell>{expense.title}</TableCell>
-                            <TableCell>{expense.category}</TableCell>
+                            <TableCell className='text-xs font-medium'>{expense.category}</TableCell>
                             <TableCell className='font-semibold'>{currencyFormat(expense.amount)}</TableCell>
                             <TableCell>---</TableCell>
                         </TableRow>

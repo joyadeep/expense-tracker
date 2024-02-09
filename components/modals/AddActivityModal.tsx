@@ -16,12 +16,11 @@ import { useActivity } from '@/hooks/useActivity'
 import { categoryConstant } from '@/constants/CategoryConstant'
 
 // TODO : when activity is added all other pages should be refetched.
-// TODO : add icons to category if possible
 
 const formSchema=z.object({
   title:z.string().min(1,{message:"Title is required"}),
   amount:z.coerce.number().min(1,{message:"Amount is required"}),
-  category:z.nativeEnum(Category)
+  category:z.nativeEnum(Category).or(z.string().min(1,{message:"Category is required"}))
 })
 const categories = {
   HOUSING_EXPENSES: "Housing Expenses",
@@ -51,7 +50,7 @@ const AddActivityModal = () => {
     defaultValues:{
       title:"",
       amount:0,
-      category:Category.ENTERTAINMENT
+      category:""
     }
   })
 
@@ -133,8 +132,8 @@ const AddActivityModal = () => {
                     <SelectGroup>
                       {Object.entries(categories).map(([key, value]) => (
                         <SelectItem key={key} value={key}>
-                          <span className='flex gap-2 items-center'>
-                          {categoryConstant[key]} {value}
+                          <span className='flex gap-2 items-center text-xs'>
+                          <div>{categoryConstant[key]}</div> {value}
                           </span>
                         </SelectItem>
                       ))}
