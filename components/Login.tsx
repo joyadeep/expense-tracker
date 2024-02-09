@@ -10,11 +10,12 @@ import axios from "axios";
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import Link from 'next/link';
+import { toast } from 'sonner';
 
 // TODO : use username instead of email also change in api.
 
 const formSchama = Z.object({
-    email:Z.string().email({message:"Email is required"}),
+    username:Z.string().min(1,{message:"Username is required"}),
     password:Z.string().min(6,{message:"Password must be atelese 6 character long"}).max(20,{message:"Password must be less than 20 characters"}),
 })
 
@@ -26,7 +27,7 @@ const Login = () => {
     const form = useForm<Z.infer<typeof formSchama>>({
         resolver:zodResolver(formSchama),
         defaultValues:{
-            email:"",
+            username:"",
             password:""
         }
     })
@@ -35,12 +36,18 @@ const Login = () => {
         try {
             setIsLogging(true);
             const response = await axios.post("/api/login",values);
+            if (response.status!==200) {
+                throw new Error(response.data.message)
+            }
+           else {
             const {data,token}=response.data;
             localStorage.setItem("userId",data.id);
             localStorage.setItem("expense_tracker_token",token);
             router.push("/dashboard");
+           }
         } catch (error:any) {
             console.log(error.response.data.message);
+            toast.error(error.response.data.message)
         } finally {
             setIsLogging(false);
         }
@@ -56,15 +63,15 @@ const Login = () => {
         <CardContent>
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className='flex flex-col gap-4' >
-                <FormField control={form.control} name="email" render={({field})=>(
+                <FormField control={form.control} name="username" render={({field})=>(
                     <div className='flex flex-col gap-4'>
                     <FormItem>
                         <div className='flex gap-3 items-center'>
-                        <FormLabel>Email</FormLabel>
+                        <FormLabel>Username</FormLabel>
                         <FormMessage className='text-xs font-normal'/>
                         </div>
                         <FormControl>
-                            <Input type='email' placeholder='Enter your email' {...field} />
+                            <Input type='username' placeholder='Enter your username' {...field} />
                         </FormControl>
                     </FormItem>
                     </div>

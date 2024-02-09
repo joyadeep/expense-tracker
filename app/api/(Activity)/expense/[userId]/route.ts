@@ -16,6 +16,7 @@ try {
             amount:true
         },
        where:{
+            userId:params.userId,
            createdAt:{
             gte:new Date(currentDate.getFullYear(),currentDate.getMonth(),1),
             lte:new Date(currentDate.getFullYear(),currentDate.getMonth()+1,0)
@@ -29,6 +30,7 @@ try {
             amount:true
         },
         where:{
+            userId:params.userId,
             createdAt:{
                 gte:new Date(currentDate.getFullYear(),currentDate.getMonth()-1,1),
                 lte:new Date(currentDate.getFullYear(),currentDate.getMonth(),0)
