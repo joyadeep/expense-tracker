@@ -5,7 +5,7 @@ interface Istat{
     totalExpenses:number;
     currentMonthExpense:number;
     lastMonthExpense:number;
-    difference:number;
+    difference:number | undefined;
 }
 interface StatData{
     isLoading:boolean;
@@ -19,7 +19,7 @@ export const useStats=create<StatData>((set)=>({
         totalExpenses:0,
         currentMonthExpense:0,
         lastMonthExpense:0,
-        difference:0
+        difference:undefined
     },
     getStats:async()=>{
         try {

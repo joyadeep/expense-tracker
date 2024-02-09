@@ -14,9 +14,8 @@ const Chart =()=> {
       getYearlyGraph(time)
     }
   },[time])
-  console.log(time)
   return (
-   <div className='w-full h-[450px] border rounded-lg p-5'>
+   <div className='w-full h-[450px] border rounded-lg p-1 md:p-5'>
     <div className='flex justify-between items-center'>
       <h2 className='font-semibold text-black tracking-tight'>Expense graph</h2>
       <div className='w-32'>
@@ -33,21 +32,16 @@ const Chart =()=> {
       </Select>
       </div>
     </div>
-     <ResponsiveContainer width="100%" height="90%">
+     <ResponsiveContainer width="100%" height="90%" >
      <AreaChart
           width={500}
           height={300}
           data={time === "DAILY"? dailyGraph : yearlyGraph}
-          margin={{
-            top: 10,
-            right: 30,
-            left: 0,
-            bottom: 0,
-          }}
+          className='m-0 -ml-2'
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
+          <XAxis dataKey="name" tick={{ fontSize: 14}} />
+          <YAxis tick={{ fontSize: 12}} className='bg-blue-500 p-0 m-0' />
           <Tooltip />
           <defs>
       <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">

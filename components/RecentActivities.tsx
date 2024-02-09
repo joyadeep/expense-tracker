@@ -20,7 +20,7 @@ const RecentActivities = () => {
     }
   },[getActivity,data.length])
   return (
-    <div className=' h-[400px] relative overflow-hidden flex flex-col'>
+    <div className=' h-full relative overflow-hidden flex flex-col'>
         <div className='px-5 flex justify-between items-center '>
         <h5 className='font-semibold text-black tracking-tight'>Recent Activities</h5>
         <TooltipAction label='Add Activity' side='left' align='center' condition>
