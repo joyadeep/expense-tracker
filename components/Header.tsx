@@ -1,14 +1,23 @@
+"use client"
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import {AlignRight, LogOut, Settings, UserRound} from 'lucide-react'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuTrigger } from "./ui/dropdown-menu";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 interface IHeader {
   toggleOpen:()=>void;
   toggleMobileOpen:()=>void;
 }
 
+
 const Header = ({toggleOpen,toggleMobileOpen}:IHeader) => {
+  const router = useRouter();
+  const handleLogout=()=>{
+    localStorage.removeItem("expense_tracker_token");
+    localStorage.removeItem("userId");
+    router.replace("/auth")
+  }
   return (
     <header className={` w-full sticky top-0 flex justify-between items-center border-b px-5 py-3 h-16 bg-background`}>
         <div className="flex items-center gap-2 text-foreground">
@@ -27,7 +36,7 @@ const Header = ({toggleOpen,toggleMobileOpen}:IHeader) => {
             <DropdownMenuGroup>
               <DropdownMenuItem className="cursor-pointer"> <UserRound className="mr-2 h-4 w-4"/> Profile</DropdownMenuItem>
               <DropdownMenuItem className="cursor-pointer"> <Settings className="mr-2 h-4 w-4" /> Settings</DropdownMenuItem>
-              <DropdownMenuItem className="cursor-pointer"> <LogOut className="mr-2 h-4 w-4" /> Logout</DropdownMenuItem>
+              <DropdownMenuItem className="cursor-pointer" onClick={handleLogout}> <LogOut className="mr-2 h-4 w-4" /> Logout</DropdownMenuItem>
             </DropdownMenuGroup>
           </DropdownMenuContent>
         </DropdownMenu>

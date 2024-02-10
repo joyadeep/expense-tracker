@@ -1,3 +1,4 @@
+import { currencyShorter } from "@/lib/currency";
 import { db } from "@/lib/db";
 import { NextRequest, NextResponse } from "next/server"
 
@@ -25,7 +26,7 @@ const getMonthlyData= async(params:any)=>{
 
     const yearlyGraph = await db.activity.findMany({where:{userId:params.userId,createdAt:{gte:lastYearStartDate,lte:currentDate}},orderBy:{createdAt:"asc"}});
 
-    const objectMonthlyTotals:any = {};
+    const objectMonthlyTotals:{[key:string]:number} = {};
 
     yearlyGraph.forEach(data=>{
         const monthKey = `${months[data.createdAt.getMonth()]} ${data.createdAt.getFullYear()}`;
@@ -48,7 +49,7 @@ const getDailyData= async(params:any)=>{
     lastMonth.setMonth(currentDate.getMonth()-1);
 
     const dailyGraph = await db.activity.findMany({where:{userId:params.userId,createdAt:{gte:lastMonth,lte:currentDate}},orderBy:{createdAt:"asc"}});
-    const objectDailyTotals:any = {};
+    const objectDailyTotals:{[key:string]:number} = {};
     dailyGraph.forEach(data=>{
         const dayKey = `${months[data.createdAt.getMonth()]}-${data.createdAt.getDate()}`;
         if(!objectDailyTotals[dayKey]){

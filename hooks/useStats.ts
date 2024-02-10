@@ -1,6 +1,7 @@
+import  axiosInstance  from '@/lib/axiosInstance';
 import axios from 'axios';
 import {create} from 'zustand'
-
+//TODO : create middleware to check if token is really added.
 interface Istat{
     totalExpenses:number;
     currentMonthExpense:number;
@@ -12,7 +13,6 @@ interface StatData{
     data:Istat;
     getStats:()=>Promise<void>;
 }
-
 export const useStats=create<StatData>((set)=>({
     isLoading:false,
     data:{
@@ -24,7 +24,7 @@ export const useStats=create<StatData>((set)=>({
     getStats:async()=>{
         try {
             set({isLoading:true})
-            const response =await axios.get(`/api/expense/${localStorage.getItem("userId")}`);
+            const response =await axiosInstance.get(`/api/expense/${localStorage.getItem("userId")}`);
             console.log("stats response",response)
             set({data:response.data.data})
         } catch (error:any) {

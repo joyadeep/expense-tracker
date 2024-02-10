@@ -53,7 +53,7 @@ export default function Home() {
      <p className="text-xs md:text-sm w-full md:w-3/4 mx-auto text-justify md:text-center text-neutral-800/80">Embark on a journey of financial empowerment with our cutting-edge expense tracker. Precision meets simplicity as every transaction finds purpose in our intuitive platform. Seamlessly navigate your expenses, charting a course towards financial brilliance. Crafted for those who seek meticulous budgeting and smart spending, our app transforms every cent into a strategic step towards long-term prosperity. Elevate your financial IQ – where precision tracking meets masterful living.</p>
      <Button variant={"primary"} size={"lg"} className="w-fit shadow-lg shadow-blue-400/80 "  onClick={()=>router.push("/auth?type=register")}>Request a Demo</Button>
      </section>
-    <div className="w-1/2  aspect-video mx-auto relative mt-5">
+    <div className="w-full md:w-1/2  aspect-video mx-auto relative mt-5">
       <Image src={landingIllustration} alt={"landing illustration"} className="object-contain" />
     </div>
     </main>

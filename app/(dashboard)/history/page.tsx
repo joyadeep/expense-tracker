@@ -1,4 +1,5 @@
 "use client"
+import OptionDrawer from '@/components/Drawer';
 import PageHeading from '@/components/Heading'
 import { Button } from '@/components/ui/button';
 import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '@/components/ui/pagination'
@@ -38,7 +39,13 @@ const Report = () => {
                             <TableCell>{expense.title}</TableCell>
                             <TableCell className='text-xs font-medium'>{expense.category}</TableCell>
                             <TableCell className='font-semibold'>{currencyFormat(expense.amount)}</TableCell>
-                            <TableCell>---</TableCell>
+                            <TableCell className='block md:hidden'>
+                                <OptionDrawer id={expense.id} />
+                            </TableCell>
+                            <TableCell className='hidden md:flex gap-3'>
+                                <p>view</p>
+                                <p>edit</p>
+                            </TableCell>
                         </TableRow>
                     ))
                 }

@@ -12,7 +12,6 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { toast } from 'sonner';
 
-// TODO : use username instead of email also change in api.
 
 const formSchama = Z.object({
     username:Z.string().min(1,{message:"Username is required"}),

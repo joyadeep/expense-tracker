@@ -3,6 +3,7 @@ import { useGraph } from '@/hooks/useGraph';
 import React, { useEffect, useState } from 'react'
 import { XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area } from 'recharts';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from './ui/select';
+import { currencyShorter } from '@/lib/currency';
 // TODO : DayType is not accessible
 
 
@@ -14,6 +15,18 @@ const Chart =()=> {
       getYearlyGraph(time)
     }
   },[time])
+
+  const CustomYAxisTick = (props:any) => {
+    const { x, y, payload } = props;
+    return (
+      <g transform={`translate(${x},${y})`}>
+        <text x={0} y={-10} dy={16} textAnchor="end" fill="#666" className='text-xs'>
+          {currencyShorter(payload.value)}
+        </text>
+      </g>
+    );
+  };
+
   return (
    <div className='w-full h-[450px] border rounded-lg p-1 md:p-5'>
     <div className='flex justify-between items-center'>
@@ -32,16 +45,14 @@ const Chart =()=> {
       </Select>
       </div>
     </div>
-     <ResponsiveContainer width="100%" height="90%" >
+     <ResponsiveContainer width="100%" height="95%" >
      <AreaChart
-          width={500}
-          height={300}
+          
           data={time === "DAILY"? dailyGraph : yearlyGraph}
-          className='m-0 -ml-2'
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" tick={{ fontSize: 14}} />
-          <YAxis tick={{ fontSize: 12}} className='bg-blue-500 p-0 m-0' />
+          <YAxis tick={CustomYAxisTick} />
           <Tooltip />
           <defs>
       <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
