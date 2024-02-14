@@ -15,10 +15,10 @@ const RecentActivities = () => {
   const {data,getActivity,error,isLoading}=useActivity();
   const {onOpen} = useModal()
   useEffect(()=>{
-    if(data.length === 0){
+    if(data?.length === 0){
         getActivity();
     }
-  },[getActivity,data.length])
+  },[getActivity,data?.length])
   return (
     <div className=' h-full relative overflow-hidden flex flex-col'>
         <div className='px-5 flex justify-between items-center '>
@@ -42,7 +42,7 @@ const RecentActivities = () => {
         </div>
           ))
           :
-          data.map((activity,index)=>(
+          data?.map((activity,index)=>(
             <div key={index} className='px-5 flex justify-between gap-5 items-center py-2  hover:bg-black/5 cursor-pointer'>
             <div className='flex justify-center items-center w-8 h-8 text-black  rounded-full bg-black/10'>
               {categoryConstant[activity.category]}

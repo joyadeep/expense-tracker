@@ -7,6 +7,7 @@ import React, { useEffect } from 'react'
 import Piechart from '@/components/Piechart'
 import RecentActivities from '@/components/RecentActivities'
 import { useStats } from '@/hooks/useStats'
+import BarCharts from '@/components/BarCharts'
 
 const Dashboard = () => {
   const {data,getStats}= useStats();
@@ -17,9 +18,9 @@ const Dashboard = () => {
     <main>
         <Heading title="Overview" />
         <div className='flex flex-col md:flex-row justify-between gap-2 md:gap-10'>
-            <StatCard icon={<HandCoins size={18} strokeWidth={2}/>} title='This Month' amount={data.currentMonthExpense} flux={data.difference}/>
-            <StatCard icon={<Wallet size={18} strokeWidth={2}/>} title='Total Expenses' amount={data.totalExpenses} />
-            <StatCard icon={<Banknote size={18} strokeWidth={2}/>} title='Last Month' amount={data.lastMonthExpense} />
+            <StatCard icon={<HandCoins size={18} strokeWidth={2}/>} title='This Month' amount={data?.currentMonthExpense} flux={data?.difference}/>
+            <StatCard icon={<Wallet size={18} strokeWidth={2}/>} title='Total Expenses' amount={data?.totalExpenses} />
+            <StatCard icon={<Banknote size={18} strokeWidth={2}/>} title='Last Month' amount={data?.lastMonthExpense} />
         </div>
         <section className='flex flex-col md:flex-row gap-3 mt-5 h-full md:h-[450px] '>
         <div className='w-full md:w-2/3 bg-white rounded-lg '>
@@ -29,6 +30,9 @@ const Dashboard = () => {
           <RecentActivities/>
         </div>
         </section>
+        {/* <section className=' h-[500px]'>
+          <BarCharts/>
+        </section> */}
     </main>
   )
 }

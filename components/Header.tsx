@@ -4,6 +4,8 @@ import {AlignRight, LogOut, Settings, UserRound} from 'lucide-react'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuTrigger } from "./ui/dropdown-menu";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import axiosInstance from "@/lib/axiosInstance";
+import { toast } from "sonner";
 
 interface IHeader {
   toggleOpen:()=>void;
@@ -14,9 +16,15 @@ interface IHeader {
 const Header = ({toggleOpen,toggleMobileOpen}:IHeader) => {
   const router = useRouter();
   const handleLogout=()=>{
-    localStorage.removeItem("expense_tracker_token");
-    localStorage.removeItem("userId");
-    router.replace("/auth")
+    axiosInstance.post("/api/logout")
+    .then((res)=>{
+      toast.success(res.data.message);
+      router.replace("/auth")
+    })
+    .catch((error)=>{
+      toast.error(error.response.data.message)
+    });
+    
   }
   return (
     <header className={` w-full sticky top-0 flex justify-between items-center border-b px-5 py-3 h-16 bg-background`}>

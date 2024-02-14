@@ -39,9 +39,6 @@ const Login = () => {
                 throw new Error(response.data.message)
             }
            else {
-            const {data,token}=response.data;
-            localStorage.setItem("userId",data.id);
-            localStorage.setItem("expense_tracker_token",token);
             router.push("/dashboard");
            }
         } catch (error:any) {
@@ -66,11 +63,11 @@ const Login = () => {
                     <div className='flex flex-col gap-4'>
                     <FormItem>
                         <div className='flex gap-3 items-center'>
-                        <FormLabel>Username</FormLabel>
+                        <FormLabel className='required'>Username</FormLabel>
                         <FormMessage className='text-xs font-normal'/>
                         </div>
                         <FormControl>
-                            <Input type='username' placeholder='Enter your username' {...field} />
+                            <Input type='username' placeholder='Enter username' {...field} />
                         </FormControl>
                     </FormItem>
                     </div>
@@ -80,11 +77,11 @@ const Login = () => {
                     <div className='flex flex-col gap-4'>
                     <FormItem>
                         <div className='flex gap-3 items-center'>
-                        <FormLabel>Password</FormLabel>
+                        <FormLabel className='required'>Password</FormLabel>
                         <FormMessage className='text-xs font-normal'/>
                         </div>
                         <FormControl>
-                            <Input type='password' placeholder='Enter your password' {...field} />
+                            <Input type='password' placeholder='Enter password' {...field} />
                         </FormControl>
                     </FormItem>
                     

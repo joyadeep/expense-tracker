@@ -1,4 +1,4 @@
-import axios from "axios";
+import axiosInstance from "@/lib/axiosInstance";
 import {create} from "zustand"
 
 interface Igraph {
@@ -19,11 +19,11 @@ export const useGraph = create <Igraph>((set)=>({
         set({isLoading:true})
         try {
             if(time==="MONTHLY"){
-            const response = await axios.get(`/api/graph/${localStorage.getItem("userId")}?time=${time}`);
+            const response = await axiosInstance.get(`/api/graph/${localStorage.getItem("userId")}?time=${time}`);
             set({yearlyGraph:response.data.data})
             }
             else{
-                const response = await axios.get(`/api/graph/${localStorage.getItem("userId")}?time=${time}`);
+                const response = await axiosInstance.get(`/api/graph/${localStorage.getItem("userId")}?time=${time}`);
                 set({dailyGraph:response.data.data})
             }
         } catch (error) {

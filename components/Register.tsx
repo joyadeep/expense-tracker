@@ -65,11 +65,11 @@ function Register() {
                         <div className='flex flex-col gap-4'>
                         <FormItem>
                             <div className='flex gap-3 items-center'>
-                            <FormLabel>Email</FormLabel>
+                            <FormLabel className='required'>Email</FormLabel>
                             <FormMessage className='text-xs font-normal'/>
                             </div>
                             <FormControl>
-                                <Input type='email' placeholder='Enter your email' {...field} />
+                                <Input type='email' placeholder='Enter email' {...field} />
                             </FormControl>
                         </FormItem>
                         </div>
@@ -79,7 +79,7 @@ function Register() {
                         <div className='flex flex-col gap-4'>
                         <FormItem>
                             <div className='flex gap-3 items-center'>
-                            <FormLabel>Username</FormLabel>
+                            <FormLabel className='required'>Username</FormLabel>
                             <FormMessage className='text-xs font-normal'/>
                             </div>
                             <FormControl>
@@ -93,11 +93,11 @@ function Register() {
                         <div className='flex flex-col gap-4'>
                         <FormItem>
                             <div className='flex gap-3 items-center'>
-                            <FormLabel>Password</FormLabel>
+                            <FormLabel className='required'>Password</FormLabel>
                             <FormMessage className='text-xs font-normal'/>
                             </div>
                             <FormControl>
-                                <Input type='password' placeholder='Enter your password' {...field} />
+                                <Input type='password' placeholder='Enter password' {...field} />
                             </FormControl>
                         </FormItem>   
                         </div>
@@ -107,11 +107,11 @@ function Register() {
                         <div className='flex flex-col gap-4'>
                         <FormItem>
                             <div className='flex gap-3 items-center'>
-                            <FormLabel>Confirm Password</FormLabel>
+                            <FormLabel className='required'>Confirm Password</FormLabel>
                             <FormMessage className='text-xs font-normal'/>
                             </div>
                             <FormControl>
-                                <Input type='password' placeholder='Enter your password' {...field} />
+                                <Input type='password' placeholder='Reenter passowrd' {...field} />
                             </FormControl>
                         </FormItem>
                         </div>

@@ -18,9 +18,16 @@ try {
     if(!isPasswordCorrect){
         return NextResponse.json({message:"Invalid credentials"},{status:400})
     }
+    const tokenData = {
+        id:user.id,
+        email:user.email,
+        username:user.username
+    }
 
-    const token = jwt.sign({username},process.env.JWT_SECRET!);
-    return NextResponse.json({message:"success",data:user,token:token},{status:200})
+    const token = jwt.sign(tokenData,process.env.JWT_SECRET!);
+    const response = NextResponse.json({message:"user logged in successfully"},{status:200})
+    response.cookies.set("token",token,{httpOnly:true})
+    return response;
 
 } catch (error) {
     return NextResponse.json({error:"Internal Server Error"},{status:500})

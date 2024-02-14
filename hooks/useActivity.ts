@@ -1,5 +1,5 @@
+import axiosInstance from '@/lib/axiosInstance';
 import { Activity } from '@prisma/client';
-import axios from 'axios';
 import {create} from 'zustand'
 
 
@@ -25,7 +25,7 @@ export const useActivity=create<ActivityData>((set)=>({
     getActivity:async()=>{
         set({isLoading:true})
        try {
-        const response =await axios.get(`/api/activity/${localStorage.getItem("userId")}`);
+        const response =await axiosInstance.get(`/api/activity/${localStorage.getItem("userId")}`);
         set({data:response.data.data})
        } catch (error:any) {
         set({error:error.response.data.message})
@@ -37,7 +37,7 @@ export const useActivity=create<ActivityData>((set)=>({
     getPagedActivity:async(pageNumber) => {
         set({isLoading:true});
         try {
-            const response = await axios.get(`/api/activity/${localStorage.getItem("userId")}?pageNumber=${pageNumber}`);
+            const response = await axiosInstance.get(`/api/activity/${localStorage.getItem("userId")}?pageNumber=${pageNumber}`);
             set({pagedData:response.data.data});
         } catch (error:any) {
             set({pagedError:error.response.data.message})
@@ -48,7 +48,7 @@ export const useActivity=create<ActivityData>((set)=>({
     addActivity:async(activity)=>{
         try {
             set({isLoading:true})
-            const response =await axios.post(`/api/activity`,activity);
+            const response =await axiosInstance.post(`/api/activity`,activity);
             console.log("add activity response",response)
             if (response.status!==201){
                 throw new Error(response.data.data.message)
