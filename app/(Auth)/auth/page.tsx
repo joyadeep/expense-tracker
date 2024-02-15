@@ -2,9 +2,10 @@
 
 import { Suspense } from "react"
 import AuthComponent from "./auth"
+import Loading from "@/components/Loading"
 const Auth = () => {
   return (
-    <Suspense fallback={<div>Loading...</div>}> {/* // TODO: create fallback UI  */}
+    <Suspense fallback={<Loading/>}> 
       <AuthComponent />
     </Suspense>
   )

@@ -15,10 +15,8 @@ export async function middleware (request:NextRequest) {
         console.log("Token verification error ",error)
     }) 
     )
-    const isVerifiedToken = verifiedToken ? true : false
 
     if(path.startsWith("/api")) {
-        // console.log("paht =",path," token =",isVerifiedToken)
         if(isPublicRoute){
             return NextResponse.next();
         }
@@ -34,7 +32,6 @@ export async function middleware (request:NextRequest) {
     if (!isPublicPath && !verifiedToken) {
         return NextResponse.redirect(new URL("/auth",request.url))
     }
-    // console.log("middleware is running",verifiedToken)
 }
 
 export const config = {
