@@ -84,6 +84,7 @@ export const GET = async (req:NextRequest,{params}:{params:{userId:string}}) => 
 
         
     } catch (error) {
+        console.log("error ===",error)
         return NextResponse.json({message:"Something went wrong"},{status:500})
     }
 }

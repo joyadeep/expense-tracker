@@ -39,6 +39,7 @@ const Login = () => {
                 throw new Error(response.data.message)
             }
            else {
+            localStorage.setItem("userId",response.data.id); // * remove userId response for production
             router.push("/dashboard");
            }
         } catch (error:any) {

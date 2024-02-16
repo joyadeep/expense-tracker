@@ -20,7 +20,7 @@ const Chart =()=> {
     const { x, y, payload } = props;
     return (
       <g transform={`translate(${x},${y})`}>
-        <text x={0} y={-10} dy={16} textAnchor="end" fill="#666" className='text-xs'>
+        <text x={0} y={-10} dy={16} textAnchor="end" fill="#666" className='text-xs -ml-10'>
           {currencyShorter(payload.value)}
         </text>
       </g>
@@ -47,12 +47,12 @@ const Chart =()=> {
     </div>
      <ResponsiveContainer width="100%" height="95%" >
      <AreaChart
-          
           data={time === "DAILY"? dailyGraph : yearlyGraph}
+          margin={{ top: 0, right: 0, left: -10, bottom: 0}}
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" tick={{ fontSize: 14}} />
-          <YAxis tick={CustomYAxisTick} />
+          <YAxis tick={CustomYAxisTick}  />
           <Tooltip />
           <defs>
       <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">

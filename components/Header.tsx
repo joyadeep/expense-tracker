@@ -19,6 +19,7 @@ const Header = ({toggleOpen,toggleMobileOpen}:IHeader) => {
     axiosInstance.post("/api/logout")
     .then((res)=>{
       toast.success(res.data.message);
+      localStorage.removeItem("userId");
       router.replace("/auth")
     })
     .catch((error)=>{

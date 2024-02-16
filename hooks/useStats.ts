@@ -25,7 +25,6 @@ export const useStats=create<StatData>((set)=>({
         try {
             set({isLoading:true})
             const response =await axiosInstance.get(`/api/expense/${localStorage.getItem("userId")}`);
-            console.log("stats response",response)
             set({data:response.data.data})
         } catch (error:any) {
             console.log(error)

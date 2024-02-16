@@ -15,7 +15,7 @@ const Dashboard = () => {
     getStats()
   },[])
   return (
-    <main>
+    <main className='flex flex-col gap-5'>
         <Heading title="Overview" />
         <div className='flex flex-col md:flex-row justify-between gap-2 md:gap-10'>
             <StatCard icon={<HandCoins size={18} strokeWidth={2}/>} title='This Month' amount={data?.currentMonthExpense} flux={data?.difference}/>
@@ -26,13 +26,13 @@ const Dashboard = () => {
         <div className='w-full md:w-2/3 bg-white rounded-lg '>
         <Chart />
         </div>
-        <div className='border border-slate-200 rounded-md bg-white h-full w-full md:w-1/3 pt-2'>
+        <div className='border border-slate-200 rounded-md bg-white h-[350px] md:h-full w-full md:w-1/3 pt-2'>
           <RecentActivities/>
         </div>
         </section>
-        {/* <section className=' h-[500px]'>
+        <section className=' h-[500px] mt-10'>
           <BarCharts/>
-        </section> */}
+        </section>
     </main>
   )
 }
