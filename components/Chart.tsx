@@ -31,7 +31,7 @@ const Chart =()=> {
    <div className='w-full h-[450px] border rounded-lg p-1 md:p-5'>
     <div className='flex justify-between items-center'>
       <h2 className='font-semibold text-black tracking-tight'>Expense graph</h2>
-      <div className='w-32'>
+      <div className='w-32 mb-2'>
       <Select value={time} onValueChange={(value)=>setTime(value)} >
         <SelectTrigger>
           <SelectValue placeholder="select time" />
@@ -49,9 +49,10 @@ const Chart =()=> {
      <AreaChart
           data={time === "DAILY"? dailyGraph : yearlyGraph}
           margin={{ top: 0, right: 0, left: -10, bottom: 0}}
+          className='pb-3 md:pb-0'
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" tick={{ fontSize: 14}} />
+          <XAxis dataKey="name" tick={{ fontSize: 10}} />
           <YAxis tick={CustomYAxisTick}  />
           <Tooltip />
           <defs>

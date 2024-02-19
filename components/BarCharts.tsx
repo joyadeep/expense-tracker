@@ -9,7 +9,7 @@ import { currencyShorter } from '@/lib/currency';
 type Props = {}
 export const shortCategories = {
     HOUSING_EXPENSES: "Housing",
-    TRANSPORTATION_COSTS: "Trans",
+    TRANSPORTATION_COSTS: "Transportation",
     FOOD_AND_DINING: "Food",
     HEALTHCARE: "Health",
     UTILITIES: "Utils",
@@ -40,6 +40,8 @@ const CustomYAxisTick = (props:any) => {
   );
 };
 
+
+
 const BarCharts = (props: Props) => {
   const [time,setTime]=useState("MONTH")
   const {isLoading,error,getBargraph,monthBarGraph,yearBarGraph} = useBarGraph();
@@ -52,7 +54,7 @@ const BarCharts = (props: Props) => {
     <div className='w-full md:w-3/4 h-[450px] border rounded-lg p-1 md:p-5'>
     <div className='flex justify-between items-center'>
       <h2 className='font-semibold text-black tracking-tight'>Expense by category</h2>
-      <div className='w-32'>
+      <div className='w-32 mb-2'>
       <Select value={time} onValueChange={(value)=>setTime(value)} >
         <SelectTrigger>
           <SelectValue placeholder="select time" />
@@ -73,9 +75,9 @@ const BarCharts = (props: Props) => {
           <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="category" angle={-20} textAnchor='end' interval={0} tickFormatter={formatXAxis} className='text-xs w-full' />
           <YAxis tick={CustomYAxisTick} />
-          <Tooltip />
-          <Legend />
-          <Bar dataKey="expense" fill="#BB0D32" className=''  />
+          <Tooltip wrapperStyle={{backgroundColor:"#BB0D32"}} cursorStyle={{stroke:"#BB0D32"}} />
+          {/* <Legend className='bg-black' /> */}
+          <Bar dataKey="expense" fill="#BB0D32" barSize={30}     />
         </BarChart>
       </ResponsiveContainer>
       </div>
