@@ -18,11 +18,6 @@ const MobileSidenav = ({isOpen,toggleOpen}:IMobileSidenav) => {
         href:"/dashboard"
       },
       {
-        title:"Login",
-        icon:<Banknote size={18} />,
-        href:"/auth"
-      },
-      {
         title:"History",
         icon:<BedSingle size={18} />,
         href:"/history"

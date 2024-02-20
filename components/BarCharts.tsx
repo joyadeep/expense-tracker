@@ -69,15 +69,15 @@ const BarCharts = (props: Props) => {
       </div>
     </div>
     <ResponsiveContainer width="100%" height="100%">
-        <BarChart className=' pb-14'  height={500} data={time === "MONTH" ? monthBarGraph : yearBarGraph}
+        <BarChart className=' pb-14 md:pb-0'  height={500} data={time === "MONTH" ? monthBarGraph : yearBarGraph}
         margin={{ top: 0, right: 0, left: -10, bottom: 0}}
         >
           <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="category" angle={-20} textAnchor='end' interval={0} tickFormatter={formatXAxis} className='text-xs w-full' />
-          <YAxis tick={CustomYAxisTick} />
+        <XAxis dataKey="category" angle={-20} fontSize={10} textAnchor='end' interval={0} tickFormatter={formatXAxis} className='text-xs w-full' />
+          <YAxis tick={CustomYAxisTick}/>
           <Tooltip wrapperStyle={{backgroundColor:"#BB0D32"}} cursorStyle={{stroke:"#BB0D32"}} />
           {/* <Legend className='bg-black' /> */}
-          <Bar dataKey="expense" fill="#BB0D32" barSize={30}     />
+          <Bar dataKey="expense" fill="#BB0D32"     />
         </BarChart>
       </ResponsiveContainer>
       </div>

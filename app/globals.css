@@ -71,7 +71,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-white text-foreground
+    @apply bg-white text-foreground h-screen overflow-hidden
   }
   .required {
     @apply after:content-["*"] after:ml-0.5 after:text-red-500

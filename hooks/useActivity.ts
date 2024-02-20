@@ -7,7 +7,7 @@ import {create} from 'zustand'
 interface ActivityData {
  isLoading:boolean;
  data:Activity[];
- pagedData:Activity[];
+ pagedData:{currentPage:number,totalPages:number,data:Activity[]};
  error:string;
  pagedError:string;
  getActivity:()=>Promise<void>;
@@ -19,7 +19,11 @@ interface ActivityData {
 export const useActivity=create<ActivityData>((set)=>({
     isLoading:false,
     data:[],
-    pagedData:[],
+    pagedData:{
+        currentPage:0,
+        totalPages:0,
+        data:[]
+    },
     error:"",
     pagedError:"",
     getActivity:async()=>{
@@ -38,7 +42,7 @@ export const useActivity=create<ActivityData>((set)=>({
         set({isLoading:true});
         try {
             const response = await axiosInstance.get(`/api/activity/${localStorage.getItem("userId")}?pageNumber=${pageNumber}`);
-            set({pagedData:response.data.data});
+            set({pagedData:response.data});
         } catch (error:any) {
             set({pagedError:error.response.data.message})
         } finally {
@@ -49,7 +53,6 @@ export const useActivity=create<ActivityData>((set)=>({
         try {
             set({isLoading:true})
             const response =await axiosInstance.post(`/api/activity`,activity);
-            console.log("add activity response",response)
             if (response.status!==201){
                 throw new Error(response.data.data.message)
             }

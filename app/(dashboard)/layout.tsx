@@ -32,6 +32,7 @@ const Layout = ({children}:{children:React.ReactNode}) => {
             </div>
             </div>
     </div>
+    
   )
 }
 
