@@ -1,13 +1,13 @@
 import {create} from 'zustand'
 
-export type ModalType= "Add Activity"
+export type ModalType= "Add Activity" | "ViewEdit Activity"
 
 interface ModalData{
 }
 
 interface ModalStore {
     type:ModalType | null;
-    data:ModalData;
+    data:any;
     isOpen:boolean;
     onOpen:(type:ModalType,data?:ModalData)=>void;
     onClose:()=>void;

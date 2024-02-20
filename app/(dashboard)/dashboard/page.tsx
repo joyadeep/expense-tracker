@@ -22,7 +22,7 @@ const Dashboard = () => {
             <StatCard icon={<Wallet size={18} strokeWidth={2}/>} title='Total Expenses' amount={data?.totalExpenses} />
             <StatCard icon={<Banknote size={18} strokeWidth={2}/>} title='Last Month' amount={data?.lastMonthExpense} />
         </div>
-        <section className='flex flex-col md:flex-row gap-3 mt-5 h-full md:h-[450px] '>
+        <section className='flex flex-col md:flex-row gap-3 h-full md:h-[450px] '>
         <div className='w-full md:w-2/3 bg-white rounded-lg '>
         <Chart />
         </div>
@@ -30,7 +30,7 @@ const Dashboard = () => {
           <RecentActivities/>
         </div>
         </section>
-        <section className=' h-[500px] mt-10'>
+        <section className=' h-[500px]'>
           <BarCharts/>
         </section>
     </main>

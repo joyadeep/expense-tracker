@@ -4,6 +4,7 @@ import PageHeading from '@/components/Heading'
 import Paginate from '@/components/Paginate';
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from '@/components/ui/table'
 import { useActivity } from '@/hooks/useActivity';
+import { useModal } from '@/hooks/useModal';
 import { currencyFormat } from '@/lib/currency';
 import { useEffect, useState } from 'react';
 
@@ -18,6 +19,8 @@ const Report = () => {
             getPagedActivity(page)
         }
     },[page])
+
+    const {onOpen}=useModal();
 
     const onPageChange =(page:number)=>{
         setPage(page);
@@ -48,7 +51,7 @@ const Report = () => {
                                 <OptionDrawer id={expense.id} />
                             </TableCell>
                             <TableCell className='hidden md:flex gap-3'>
-                                <p>view</p>
+                                <p onClick={()=>{onOpen("ViewEdit Activity",{mode:"View",expenseData:expense})}} >view</p>
                                 <p>edit</p>
                             </TableCell>
                         </TableRow>

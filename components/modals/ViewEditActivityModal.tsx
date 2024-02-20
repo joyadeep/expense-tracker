@@ -1,63 +1,47 @@
-"use client"
 import React from 'react'
-import * as z from 'zod'
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '../ui/dialog'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form'
+import { Input } from '../ui/input'
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
 import { Button } from '../ui/button'
 import { useModal } from '@/hooks/useModal'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form'
-import { Input } from '../ui/input'
-import { Category } from '@prisma/client'
-import { toast } from 'sonner'
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
-import { useActivity } from '@/hooks/useActivity'
-import { categoryConstant,categories } from '@/constants/CategoryConstant'
 import { formSchema } from '@/schama/ActivitySchama'
+import * as z from 'zod'
+import { categories, categoryConstant } from '@/constants/CategoryConstant'
 
-// TODO : when activity is added all other pages should be refetched.
+interface Ivieweditactivity {
+    type:"View" | "Edit";
+}
 
+const ViewEditActivityModal = () => {
+    
+    const {isOpen,onClose,type,data} = useModal();
+    const form = useForm({
+        resolver:zodResolver(formSchema),
+        defaultValues:{
+          title:"",
+          amount:0,
+          category:""
+        }
+      })
+    const  isModalOpen = isOpen && type === "ViewEdit Activity";
+    const {mode,expenseData} = data;
 
+    const isLoading = form.formState.isSubmitting;
 
-const AddActivityModal = () => {
-
-  const {isOpen,onClose,type,data} = useModal();
-  const {addActivity}=useActivity();
-
-  const form = useForm({
-    resolver:zodResolver(formSchema),
-    defaultValues:{
-      title:"",
-      amount:0,
-      category:""
+    const onSubmit = async(values:z.infer<typeof formSchema>)=>{
+        // TODO : update activity also try to update type
     }
-  })
 
-  const isLoading = form.formState.isSubmitting;
-  const  isModalOpen = isOpen && type === "Add Activity";
 
-  const onSubmit = async(values:z.infer<typeof formSchema>)=>{
-    try {
-      console.log(values);
-      const activityData= {...values,userId:localStorage.getItem("userId")};
-      
-      await addActivity(activityData);
-      
-      toast.success("Activity added successfully");
-      onClose();
-      form.reset();
-    } catch (error) {
-      console.log(error);
-      toast.error("Cannot add activity. Something went wrong")
-    }
-  }
-  
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
     <DialogContent className="sm:max-w-[500px]">
       <DialogHeader>
-        <DialogTitle>Add Expense</DialogTitle>
-        <DialogDescription>Add your expenses to store in database. </DialogDescription>
+        <DialogTitle>{mode} Expense</DialogTitle>
+        {/* <DialogDescription>Add your expenses to store in database. </DialogDescription> */}
       </DialogHeader>
         <Form {...form} >
         <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -72,7 +56,7 @@ const AddActivityModal = () => {
               <FormMessage className='text-xs' />
               </div>
               <FormControl>
-                <Input placeholder="bought an apple" {...field} />
+                <Input readOnly placeholder="bought an apple" {...field} />
               </FormControl>
               
             </FormItem>
@@ -88,7 +72,7 @@ const AddActivityModal = () => {
               <FormMessage className='text-xs' />
               </div>
               <FormControl>
-                <Input type='number' {...field} />
+                <Input readOnly type='number' {...field} />
               </FormControl>
             </FormItem>
           )}
@@ -135,4 +119,4 @@ const AddActivityModal = () => {
   )
 }
 
-export default AddActivityModal
+export default ViewEditActivityModal

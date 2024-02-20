@@ -27,7 +27,7 @@ const Layout = ({children}:{children:React.ReactNode}) => {
             <div className="block md:hidden">
               <MobileSidenav isOpen={isMobileOpen} toggleOpen={toggleMobileOpen} />
             </div>
-            <div className="  overflow-y-auto bg-white  w-full px-3 md:px-10 pt-5 mb-2 ">
+            <div className=" overflow-y-auto bg-white  w-full px-3 md:px-10 pt-5 pb-2 ">
                 {children}
             </div>
             </div>

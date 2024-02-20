@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import AddActivityModal from "../modals/AddActivityModal";
+import ViewEditActivityModal from "../modals/ViewEditActivityModal";
 
 type Props = {}
 
@@ -16,7 +17,10 @@ const ModalProvider = (props: Props) => {
         return null;
     }
   return (
-    <AddActivityModal/>
+    <>
+      <AddActivityModal/>
+    <ViewEditActivityModal />
+    </>
   )
 }
 

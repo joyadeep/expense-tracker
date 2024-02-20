@@ -6,7 +6,7 @@ interface Iheading {
 
 const Heading = ({title}:Iheading) => {
   return (
-    <div className='text-lg text-black/80 font-semibold mb-4 tracking-tight'>{title}</div>
+    <div className='text-lg text-black/80 font-semibold tracking-tight'>{title}</div>
   )
 }
 

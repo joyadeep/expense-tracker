@@ -20,3 +20,21 @@ SAVINGS_AND_INVESTMENTS:<PiggyBank strokeWidth={1}/>,
 PETS:<PawPrint strokeWidth={1}/>,
 MISCELLANEOUS:<Wallet strokeWidth={1}/>
 }
+
+export const categories = {
+    HOUSING_EXPENSES: "Housing Expenses",
+    TRANSPORTATION_COSTS: "Transportation Costs",
+    FOOD_AND_DINING: "Food and Dining",
+    HEALTHCARE: "Healthcare",
+    UTILITIES: "Utilities",
+    ENTERTAINMENT: "Entertainment",
+    PERSONAL_CARE: "Personal Care",
+    EDUCATION: "Education",
+    DEBTS_AND_LOANS: "Debts and Loans",
+    CLOTHING_AND_ACCESSORIES: "Clothing and Accessories",
+    TRAVEL: "Travel",
+    GIFTS_AND_DONATIONS: "Gifts and Donations",
+    SAVINGS_AND_INVESTMENTS: "Savings and Investments",
+    PETS: "Pets",
+    MISCELLANEOUS: "Miscellaneous"
+  };
