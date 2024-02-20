@@ -20,8 +20,6 @@ const Report = () => {
     },[page])
 
     const onPageChange =(page:number)=>{
-        console.log("page ==",page);
-
         setPage(page);
     }
 

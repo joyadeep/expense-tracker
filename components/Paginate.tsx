@@ -10,6 +10,7 @@ interface Ipagination {
 const MAX_PAGE_NUMBER = 2
 
 //  TODO : use herf to update page number but study first about performance.
+//  TODO : pagination is not shown in mobile view
 
 const Paginate = ({currentPage,totalPages,onPageChange}:Ipagination) => {
     const pageNumbers = [];

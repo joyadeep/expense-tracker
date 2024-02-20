@@ -2,6 +2,9 @@ import { db } from "@/lib/db";
 import { NextResponse } from "next/server"
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken";
+
+
+
 export const POST=async(req:Request)=>{
 try {
     const {username,password} = await req.json();
@@ -27,7 +30,13 @@ try {
     const token = jwt.sign(tokenData,process.env.JWT_SECRET!);
     // * remove userId response for production
     const response = NextResponse.json({message:"user logged in successfully",id:user.id},{status:200})
-    response.cookies.set("token",token,{httpOnly:true})
+    // response.cookies.set("token",token,{httpOnly:true})
+    response.cookies.set({
+        name:"token",
+        value:token,
+        httpOnly:true,
+        maxAge:60*60*24*7
+    })
     return response;
 
 } catch (error) {
