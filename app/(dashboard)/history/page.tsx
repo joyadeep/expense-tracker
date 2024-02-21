@@ -2,6 +2,7 @@
 import OptionDrawer from '@/components/Drawer';
 import PageHeading from '@/components/Heading'
 import Paginate from '@/components/Paginate';
+import { Button } from '@/components/ui/button';
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from '@/components/ui/table'
 import { useActivity } from '@/hooks/useActivity';
 import { useModal } from '@/hooks/useModal';
@@ -22,6 +23,8 @@ const Report = () => {
 
     const {onOpen}=useModal();
 
+    console.log("pagedData",pagedData);
+
     const onPageChange =(page:number)=>{
         setPage(page);
     }
@@ -35,7 +38,8 @@ const Report = () => {
                     <TableHead>#</TableHead>
                     <TableHead>Title</TableHead>
                     <TableHead>Category</TableHead>
-                    <TableHead>Amount</TableHead>
+                    <TableHead className='w-52 text-right'>Amount</TableHead>
+                    <TableHead className='w-40'>Created</TableHead>
                     <TableHead>Action</TableHead>
                 </TableRow>
             </TableHeader>
@@ -46,13 +50,14 @@ const Report = () => {
                             <TableCell>{index+1}</TableCell>
                             <TableCell>{expense.title}</TableCell>
                             <TableCell className='text-xs font-medium'>{expense.category}</TableCell>
-                            <TableCell className='font-semibold'>{currencyFormat(expense.amount)}</TableCell>
+                            <TableCell className='font-semibold text-right'>{currencyFormat(expense.amount)}</TableCell>
+                            <TableCell>{new Date(expense.createdAt).toDateString()}</TableCell>
                             <TableCell className='block md:hidden'>
-                                <OptionDrawer id={expense.id} />
+                                <OptionDrawer expense={expense} />
                             </TableCell>
                             <TableCell className='hidden md:flex gap-3'>
-                                <p onClick={()=>{onOpen("ViewEdit Activity",{mode:"View",expenseData:expense})}} >view</p>
-                                <p>edit</p>
+                                <p className='cursor-pointer' onClick={()=>{onOpen("ViewEdit Activity",{mode:"View",expenseData:expense})}} >view</p>
+                                <p className='cursor-pointer' onClick={()=>{onOpen("ViewEdit Activity",{mode:"Edit",expenseData:expense})}}>edit</p>
                             </TableCell>
                         </TableRow>
                     ))

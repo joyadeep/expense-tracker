@@ -2,11 +2,13 @@ import React from 'react'
 import { Drawer,DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger } from './ui/drawer'
 import { Button } from './ui/button'
 import { Eye, MoreHorizontal, Pencil } from 'lucide-react';
+import { useModal } from '@/hooks/useModal';
 
 interface IDrawer {
-    id:string;
+    expense:any;
 }
-const OptionDrawer = ({id}:IDrawer) => {
+const OptionDrawer = ({expense}:IDrawer) => {
+    const {onOpen}=useModal();
   return (
     <Drawer >
         <DrawerTrigger asChild>
@@ -17,8 +19,8 @@ const OptionDrawer = ({id}:IDrawer) => {
                 <DrawerTitle className='text-left'>Options</DrawerTitle>
             </DrawerHeader>
             <div className='w-full h-[300px] px-2'>
-                <Button variant={"ghost"} className='w-full text-lg font-normal justify-start gap-5 text-black/70'> <Eye/> View</Button>
-                <Button variant={"ghost"} className='w-full text-lg font-normal justify-start gap-5 text-black/70'> <Pencil/> Edit</Button>
+                <Button variant={"ghost"} onClick={()=>onOpen("ViewEdit Activity",{mode:"View",expenseData:expense})} className='w-full text-lg font-normal justify-start gap-5 text-black/70'> <Eye/> View</Button>
+                <Button variant={"ghost"} onClick={()=>onOpen("ViewEdit Activity",{mode:"Edit",expenseData:expense})} className='w-full text-lg font-normal justify-start gap-5 text-black/70'> <Pencil/> Edit</Button>
             </div>
         </DrawerContent>
     </Drawer>

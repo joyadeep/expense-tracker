@@ -1,4 +1,5 @@
-import React from 'react'
+"use client"
+import React, { useEffect } from 'react'
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '../ui/dialog'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form'
 import { Input } from '../ui/input'
@@ -15,6 +16,7 @@ interface Ivieweditactivity {
     type:"View" | "Edit";
 }
 
+// TODO : add icon to amount field also in add activity
 const ViewEditActivityModal = () => {
     
     const {isOpen,onClose,type,data} = useModal();
@@ -29,6 +31,14 @@ const ViewEditActivityModal = () => {
     const  isModalOpen = isOpen && type === "ViewEdit Activity";
     const {mode,expenseData} = data;
 
+    useEffect(()=>{
+      if(expenseData){
+        form.setValue("title",expenseData.title);
+        form.setValue("amount",expenseData.amount);
+        form.setValue("category",expenseData.category);
+      }
+    },[form,expenseData])
+
     const isLoading = form.formState.isSubmitting;
 
     const onSubmit = async(values:z.infer<typeof formSchema>)=>{
@@ -38,7 +48,7 @@ const ViewEditActivityModal = () => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
-    <DialogContent className="sm:max-w-[500px]">
+    <DialogContent className="sm:max-w-[500px]" onOpenAutoFocus={(e) => e.preventDefault()} >
       <DialogHeader>
         <DialogTitle>{mode} Expense</DialogTitle>
         {/* <DialogDescription>Add your expenses to store in database. </DialogDescription> */}
@@ -56,7 +66,7 @@ const ViewEditActivityModal = () => {
               <FormMessage className='text-xs' />
               </div>
               <FormControl>
-                <Input readOnly placeholder="bought an apple" {...field} />
+                <Input readOnly={mode === "View"} placeholder="expense title" {...field} />
               </FormControl>
               
             </FormItem>
@@ -72,7 +82,7 @@ const ViewEditActivityModal = () => {
               <FormMessage className='text-xs' />
               </div>
               <FormControl>
-                <Input readOnly type='number' {...field} />
+                <Input readOnly={mode === "View"} type='number' {...field} />
               </FormControl>
             </FormItem>
           )}
@@ -88,7 +98,7 @@ const ViewEditActivityModal = () => {
               </div>
               <FormControl>
                 <Select onValueChange={field.onChange} value={field.value}>
-                  <SelectTrigger>
+                  <SelectTrigger className={`${mode === "View" && "pointer-events-none"}`}>
                     <SelectValue placeholder="Select a category" />
                   </SelectTrigger>
                   <SelectContent>
@@ -107,8 +117,9 @@ const ViewEditActivityModal = () => {
             </FormItem>
           )}
         />
-         <DialogFooter>
-        <Button variant={"primary"} disabled={isLoading} type="submit">Create Activity</Button>
+         <DialogFooter className='flex gap-3 flex-col' >
+        <Button className={`${mode === "View" && "hidden"}`} variant={"primary"} disabled={isLoading} type="submit">Update</Button>
+        <Button variant={"outline"} onClick={onClose} >Close</Button>
       </DialogFooter>
         </div>
         </form>
