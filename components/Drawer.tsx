@@ -19,8 +19,8 @@ const OptionDrawer = ({expense}:IDrawer) => {
                 <DrawerTitle className='text-left'>Options</DrawerTitle>
             </DrawerHeader>
             <div className='w-full h-[300px] px-2'>
-                <Button variant={"ghost"} onClick={()=>onOpen("ViewEdit Activity",{mode:"View",expenseData:expense})} className='w-full text-md font-normal justify-start gap-5 text-black/70'> <Eye/> View Expense</Button>
-                <Button variant={"ghost"} onClick={()=>onOpen("ViewEdit Activity",{mode:"Edit",expenseData:expense})} className='w-full text-md font-normal justify-start gap-5 text-black/70'> <Pencil/> Edit Expense</Button>
+                <Button variant={"ghost"} onClick={()=>onOpen("ViewEdit Activity",{mode:"View",expenseData:expense})} className='w-full text-md font-normal justify-start gap-5 text-foreground/70'> <Eye/> View Expense</Button>
+                <Button variant={"ghost"} onClick={()=>onOpen("ViewEdit Activity",{mode:"Edit",expenseData:expense})} className='w-full text-md font-normal justify-start gap-5 text-foreground/70'> <Pencil/> Edit Expense</Button>
             </div>
         </DrawerContent>
     </Drawer>

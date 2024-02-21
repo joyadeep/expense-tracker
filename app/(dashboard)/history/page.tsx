@@ -23,7 +23,6 @@ const Report = () => {
 
     const {onOpen}=useModal();
 
-    console.log("pagedData",pagedData);
 
     const onPageChange =(page:number)=>{
         setPage(page);

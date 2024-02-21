@@ -30,7 +30,7 @@ const Chart =()=> {
   return (
    <div className='w-full h-[450px] border rounded-lg p-1 md:p-5'>
     <div className='flex justify-between items-center'>
-      <h2 className='font-semibold text-black tracking-tight'>Expense graph</h2>
+      <h2 className='font-semibold text-foreground tracking-tight'>Expense graph</h2>
       <div className='w-32 mb-2'>
       <Select value={time} onValueChange={(value)=>setTime(value)} >
         <SelectTrigger>

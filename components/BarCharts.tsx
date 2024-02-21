@@ -53,7 +53,7 @@ const BarCharts = (props: Props) => {
   return (
     <div className='w-full md:w-2/3 h-[450px] border rounded-lg p-1 md:p-5'>
     <div className='flex justify-between items-center'>
-      <h2 className='font-semibold text-black tracking-tight'>Expense by category</h2>
+      <h2 className='font-semibold text-foreground tracking-tight'>Expense by category</h2>
       <div className='w-32 mb-2'>
       <Select value={time} onValueChange={(value)=>setTime(value)} >
         <SelectTrigger>
