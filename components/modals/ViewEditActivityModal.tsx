@@ -11,6 +11,8 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { formSchema } from '@/schama/ActivitySchama'
 import * as z from 'zod'
 import { categories, categoryConstant } from '@/constants/CategoryConstant'
+import axiosInstance from '@/lib/axiosInstance'
+import { toast } from 'sonner'
 
 interface Ivieweditactivity {
     type:"View" | "Edit";
@@ -42,7 +44,15 @@ const ViewEditActivityModal = () => {
     const isLoading = form.formState.isSubmitting;
 
     const onSubmit = async(values:z.infer<typeof formSchema>)=>{
-        // TODO : update activity also try to update type
+        const response = await axiosInstance.put(`/api/activity/${expenseData.id}`,values);
+
+        if (response.status!==200) {
+            toast.error(response.data?.message)
+        }
+        else {
+          toast.success(response.data?.message);
+          onClose();
+        }
     }
 
 

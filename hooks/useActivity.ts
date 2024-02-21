@@ -29,7 +29,7 @@ export const useActivity=create<ActivityData>((set)=>({
     getActivity:async()=>{
         set({isLoading:true})
        try {
-        const response =await axiosInstance.get(`/api/activity/${localStorage.getItem("userId")}`);
+        const response =await axiosInstance.get(`/api/activity/user/${localStorage.getItem("userId")}`);
         set({data:response.data.data})
        } catch (error:any) {
         set({error:error.response.data.message})
@@ -41,7 +41,7 @@ export const useActivity=create<ActivityData>((set)=>({
     getPagedActivity:async(pageNumber) => {
         set({isLoading:true});
         try {
-            const response = await axiosInstance.get(`/api/activity/${localStorage.getItem("userId")}?pageNumber=${pageNumber}`);
+            const response = await axiosInstance.get(`/api/activity/user/${localStorage.getItem("userId")}?pageNumber=${pageNumber}`);
             set({pagedData:response.data});
         } catch (error:any) {
             set({pagedError:error.response.data.message})

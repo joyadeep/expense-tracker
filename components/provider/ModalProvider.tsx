@@ -19,7 +19,7 @@ const ModalProvider = (props: Props) => {
   return (
     <>
       <AddActivityModal/>
-    <ViewEditActivityModal />
+      <ViewEditActivityModal />
     </>
   )
 }
