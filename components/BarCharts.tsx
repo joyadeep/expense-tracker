@@ -51,7 +51,7 @@ const BarCharts = (props: Props) => {
     }
   },[time])
   return (
-    <div className='w-full md:w-3/4 h-[450px] border rounded-lg p-1 md:p-5'>
+    <div className='w-full md:w-2/3 h-[450px] border rounded-lg p-1 md:p-5'>
     <div className='flex justify-between items-center'>
       <h2 className='font-semibold text-black tracking-tight'>Expense by category</h2>
       <div className='w-32 mb-2'>

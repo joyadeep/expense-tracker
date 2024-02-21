@@ -31,7 +31,7 @@ const MobileSidenav = ({isOpen,toggleOpen}:IMobileSidenav) => {
           navitems.map((nav)=>(
               <Link href={nav.href} onClick={toggleOpen} key={nav.title} className={
               twMerge('h-9 relative flex items-center gap-2 px-2 py-2  border border-transparent hover:border-blue-400  ',
-              path===nav.href? "bg-blue-500/20 text-blue-500 font-medium" : "text-slate-900",
+              path===nav.href? "bg-blue-500/20 text-blue-500 font-medium" : "text-foreground",
               isOpen? "rounded-full" : "rounded-md justify-center gap-0 transition-all duration-500"
               )
             

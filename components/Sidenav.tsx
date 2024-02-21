@@ -26,7 +26,7 @@ const Sidenav = ({isOpen}:{isOpen:boolean}) => {
             <TooltipAction label={nav.title} align='center' side='right' key={nav.title} condition={!isOpen}>
               <Link href={nav.href} key={nav.title} className={
               twMerge('h-9 relative flex items-center gap-2 px-2 py-2  border border-transparent hover:border-blue-400  ',
-              path===nav.href? "bg-blue-500/20 text-blue-500 font-medium" : "text-slate-900",
+              path===nav.href? "bg-blue-500/20 text-blue-500 font-medium" : "text-foreground",
               isOpen? "rounded-full" : "rounded-md justify-center gap-0 transition-all duration-500"
               )
             

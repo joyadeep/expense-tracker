@@ -9,7 +9,7 @@ const AuthComponent = () => {
   const field_type = searchParams.get("type") ?? "login"
   return (
      <div className="w-full h-screen flex">
-        <div className="flex flex-1 items-center bg-white">
+        <div className="flex flex-1 items-center bg-background">
             {
               field_type ==="register" ?<Register/> : <Login/>
             }

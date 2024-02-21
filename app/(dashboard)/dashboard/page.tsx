@@ -23,10 +23,10 @@ const Dashboard = () => {
             <StatCard icon={<Banknote size={18} strokeWidth={2}/>} title='Last Month' amount={data?.lastMonthExpense} />
         </div>
         <section className='flex flex-col md:flex-row gap-3 h-full md:h-[450px] '>
-        <div className='w-full md:w-2/3 bg-white rounded-lg '>
+        <div className='w-full md:w-2/3 bg-background rounded-lg '>
         <Chart />
         </div>
-        <div className='border border-slate-200 rounded-md bg-white h-[350px] md:h-full w-full md:w-1/3 pt-2'>
+        <div className='border border-slate-200 rounded-md bg-background h-[350px] md:h-full w-full md:w-1/3 pt-2'>
           <RecentActivities/>
         </div>
         </section>

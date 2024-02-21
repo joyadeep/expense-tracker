@@ -64,7 +64,7 @@ const ViewEditActivityModal = () => {
         {/* <DialogDescription>Add your expenses to store in database. </DialogDescription> */}
       </DialogHeader>
         <Form {...form} >
-        <form onSubmit={form.handleSubmit(onSubmit)}>
+        <form  onSubmit={form.handleSubmit(onSubmit)}>
         <div className='flex flex-col gap-5'>
         <FormField
           control={form.control}
@@ -129,7 +129,7 @@ const ViewEditActivityModal = () => {
         />
          <DialogFooter className='flex gap-3 flex-col' >
         <Button className={`${mode === "View" && "hidden"}`} variant={"primary"} disabled={isLoading} type="submit">Update</Button>
-        <Button variant={"outline"} onClick={onClose} >Close</Button>
+        <Button variant={"outline"} onClick={onClose} type='button' >Close</Button>
       </DialogFooter>
         </div>
         </form>

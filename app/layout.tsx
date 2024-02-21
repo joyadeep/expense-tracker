@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import ModalProvider from "@/components/provider/ModalProvider";
 import {Toaster} from "sonner"
+import ThemeProvider from "@/components/provider/ThemeProvider";
 const poppins = Poppins({style:"normal", weight:["400","500","600","700","800","900"], subsets:["latin"]});
 
 export const metadata: Metadata = {
@@ -18,9 +19,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={poppins.className}>
+        <ThemeProvider attribute="class" defaultTheme="light" disableTransitionOnChange>
         {children}
         <ModalProvider/>
         <Toaster richColors />
+        </ThemeProvider>
         </body>
     </html>
   );

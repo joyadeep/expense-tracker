@@ -22,34 +22,34 @@ const RecentActivities = () => {
   return (
     <div className=' h-full relative overflow-hidden flex flex-col'>
         <div className='px-5 flex justify-between items-center '>
-        <h5 className='font-semibold text-black tracking-tight'>Recent Activities</h5>
+        <h5 className='font-semibold text-foreground tracking-tight'>Recent Activities</h5>
         <TooltipAction label='Add Activity' side='left' align='center' condition>
             <Button variant={"ghost"} size={"icon"} onClick={()=>onOpen("Add Activity")}><Plus/></Button>
         </TooltipAction>
         </div>
-        <div className='flex-1 overflow-hidden after:absolute after:bottom-7 after:left-0 after:w-full after:h-[80px] z-20 after:bg-gradient-to-t after:from-white/90'>
+        <div className='flex-1 overflow-hidden after:absolute after:bottom-7 after:left-0 after:w-full after:h-[80px] z-20 after:bg-gradient-to-t after:from-background/80'>
           {error ? 
-          <p className='text-center text-black/60 text-sm mt-10'>{error}</p> 
+          <p className='text-center text-foreground/60 text-sm mt-10'>{error}</p> 
           :isLoading ? 
           Array.from({length:7}).map((_,index)=>(
             <div key={index} className='px-5 flex justify-between gap-5 items-center py-2'>
-            <Skeleton className='bg-black/30 w-8 h-8 rounded-full'/>
+            <Skeleton className='bg-background/30 w-8 h-8 rounded-full'/>
             <div className='flex-1'>
-             <Skeleton className=' bg-black/30 w-full h-3 rounded-md'/>
-              <Skeleton className='bg-black/30 w-16 h-2 rounded-md mt-1'/>
+             <Skeleton className=' bg-background/30 w-full h-3 rounded-md'/>
+              <Skeleton className='bg-background/30 w-16 h-2 rounded-md mt-1'/>
             </div>
-           <Skeleton className='bg-black/30 w-14 h-5 rounded-md'/>
+           <Skeleton className='bg-background/30 w-14 h-5 rounded-md'/>
         </div>
           ))
           :
           data?.map((activity,index)=>(
-            <div key={index} className='px-5 flex justify-between gap-5 items-center py-2  hover:bg-black/5 cursor-pointer'>
-            <div className='flex justify-center items-center w-8 h-8 text-black  rounded-full bg-black/10'>
+            <div key={index} className='px-5 flex justify-between gap-5 items-center py-2  hover:bg-background/5 cursor-pointer'>
+            <div className='flex justify-center items-center w-8 h-8 text-foreground  rounded-full bg-background/10'>
               {categoryConstant[activity.category]}
             </div>
             <div className='flex-1'>
-              <p className='text-sm text-black first-letter:capitalize'>{activity.title}</p>
-              <p className='text-xs text-black/50'>{ new Date(activity.createdAt).toDateString()}</p>
+              <p className='text-sm text-foreground first-letter:capitalize'>{activity.title}</p>
+              <p className='text-xs text-foreground/50'>{ new Date(activity.createdAt).toDateString()}</p>
             </div>
             <p className='font-semibold text-sm'>{currencyFormat(activity.amount)}</p>
         </div>
