@@ -66,3 +66,11 @@ model Activity{
 
 
 }
+
+model ResetPasswordRequest {
+  id          String      @id @default(uuid())
+  email       String
+  token       String   @unique
+  createdAt   DateTime @default(now())
+  expiredAt   DateTime
+}

@@ -55,7 +55,7 @@ const Login = () => {
     <Card className=' w-full border-none shadow-none mx-3'>
         <CardHeader className='text-center '>
             <CardTitle className='text-3xl font-bold '>Login<span className='text-rose-500'>.</span></CardTitle>
-            <CardDescription className='text-black/80 text-md tracking-normal'>Welcome Back</CardDescription>
+            <CardDescription className='text-foreground/80 text-md tracking-normal'>Welcome Back</CardDescription>
         </CardHeader>
         <CardContent>
         <Form {...form}>
@@ -91,7 +91,7 @@ const Login = () => {
                 ) 
             } />
 
-            <Link href="/#" className='text-xs text-blue-500 hover:underline hover:underline-offset-4 self-end'>Forgot Password?</Link>
+            <Link href="/forgot-password" className='text-xs text-blue-500 hover:underline hover:underline-offset-4 self-end'>Forgot Password?</Link>
 
             <Button variant={"primary"} disabled={isLogging} type="submit">Login</Button>
 
