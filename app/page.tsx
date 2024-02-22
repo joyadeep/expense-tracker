@@ -30,7 +30,7 @@ export default function Home() {
   const router = useRouter();
   
   return (
-    <main className="bg-transparent">
+    <main className="bg-background h-screen overflow-y-auto">
       <div className="w-full h-14 flex items-center justify-between px-5 md:px-16 mb-5">
        <span className="flex">
        <Image alt="logo" src="/logo.svg" width={25} height={25} />
