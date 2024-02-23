@@ -1,6 +1,7 @@
 import { db } from "@/lib/db"
 import { NextResponse } from "next/server"
 
+//  TODO : don't use cron-job use quirrel for more control
 export const GET = async()=>{
     try {
         const response = await db.resetPasswordRequest.deleteMany({

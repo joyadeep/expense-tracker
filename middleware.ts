@@ -4,7 +4,7 @@ export async function middleware (request:NextRequest) {
 
     const path= request.nextUrl.pathname;
     const publicPath= ["/" ,"/auth"];
-    const publicRoutes = ["/api/login","/api/register","/api/forgot-password","/api/cleanup"]
+    const publicRoutes = ["/api/login","/api/register","/api/forgot-password","/api/cleanup","/api/reset-password"]
 
     const isPublicPath = publicPath.includes(path);
     const isPublicRoute = publicRoutes.includes(path);
