@@ -72,7 +72,7 @@ const ViewEditActivityModal = () => {
           render={({ field }) => (
             <FormItem>
               <div className='flex gap-3 items-center'>
-              <FormLabel>Title</FormLabel>
+              <FormLabel className='required'>Title</FormLabel>
               <FormMessage className='text-xs' />
               </div>
               <FormControl>
@@ -88,7 +88,7 @@ const ViewEditActivityModal = () => {
           render={({ field }) => (
             <FormItem>
               <div className='flex gap-3 items-center'>
-              <FormLabel>Amount</FormLabel>
+              <FormLabel className='required'>Amount</FormLabel>
               <FormMessage className='text-xs' />
               </div>
               <FormControl>
@@ -103,7 +103,7 @@ const ViewEditActivityModal = () => {
           render={({ field }) => (
             <FormItem>
               <div className='flex gap-3 items-center'>
-              <FormLabel>Category</FormLabel>
+              <FormLabel className='required'>Category</FormLabel>
               <FormMessage className='text-xs' />
               </div>
               <FormControl>

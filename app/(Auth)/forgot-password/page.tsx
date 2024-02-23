@@ -3,11 +3,13 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import axiosInstance from '@/lib/axiosInstance'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 import * as Z from "zod"
 
 const formSchama = Z.object({
@@ -22,9 +24,22 @@ const ForgotPassword = () => {
             email:""
         }
     })
+    const isSubmitting= form.formState.isSubmitting;
 
-    const onSubmit = ()=>{
-        // do something
+    const onSubmit = async(values:Z.infer<typeof formSchama>)=>{
+        try {
+            const response =  await axiosInstance.post("/api/forgot-password",values)
+            if(response.status ===200)
+                {
+                    form.reset();
+                    toast.success(response.data.message);
+
+                }
+           
+
+        } catch (error:any) {
+            toast.error(error.response.data.message);
+        }
     }
   return (
     <div className='w-full h-screen flex items-center justify-center'>
@@ -34,14 +49,14 @@ const ForgotPassword = () => {
                     <Image alt='paisa logo' src={"/logo.svg"} fill  />
                 </div>
                 <h4 className='text-xl font-semibold text-foreground tracking-tight'>Forgot Password<span className='text-rose-500'>.</span></h4> 
-               <p className='text-foreground text-sm'>Don&apos;t worry. We all have been here at some point of time</p>
+               <p className='text-foreground text-sm'>Don&apos;t worry. We all have been here at some point of time.</p>
 
                <Form {...form} >
                 <form className='flex flex-col gap-4' onSubmit={form.handleSubmit(onSubmit)}>
                     <FormField control={form.control} name='email' render={({field})=>(
                         <FormItem>
                         <div className='flex gap-3 items-center'>
-                        <FormLabel className='required'>Username</FormLabel>
+                        <FormLabel className='required'>Email</FormLabel>
                         <FormMessage className='text-xs font-normal'/>
                         </div>
                         <FormControl>
@@ -49,7 +64,7 @@ const ForgotPassword = () => {
                         </FormControl>
                     </FormItem>
                     )} />
-                    <Button variant={"primary"}>Submit</Button>
+                    <Button disabled={isSubmitting} variant={"primary"}>Submit</Button>
                 </form>
 
                </Form>

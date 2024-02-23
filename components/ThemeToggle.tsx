@@ -11,7 +11,6 @@ const ThemeToggle = () => {
     <Button className="bg-transparent border-0 outline-none cursor-default" variant="link" size="icon">
     <Sun onClick={() => setTheme("dark")} className=" cursor-pointer h-[1.2rem] w-[1.2rem] block dark:hidden" />
     <Moon onClick={() => setTheme("light")} className=" cursor-pointer  h-[1.2rem] w-[1.2rem] hidden dark:block " />
-    {/* <span className="sr-only">Toggle theme</span> */}
   </Button>
   )
 }
