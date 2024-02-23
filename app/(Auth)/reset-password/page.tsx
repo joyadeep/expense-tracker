@@ -2,9 +2,7 @@ import Loading from '@/components/Loading'
 import React, { Suspense } from 'react'
 import ResetPassword from './reset'
 
-type Props = {}
-
-const page = (props: Props) => {
+const page = () => {
   return (
     <Suspense fallback={<Loading/>}>
         <ResetPassword/>
