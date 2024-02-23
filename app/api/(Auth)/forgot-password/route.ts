@@ -16,7 +16,7 @@ export const POST = async(req:NextRequest)=>{
 
         const token = jwt.sign({email:email},process.env.JWT_SECRET!,{expiresIn:"24h"})
 
-        const link = `https://localhost:3000/reset-password?token=${token}`
+        const link = `${new URL(req.url).origin}/reset-password?token=${token}`
 
         await db.resetPasswordRequest.create({
             data:{
@@ -26,8 +26,6 @@ export const POST = async(req:NextRequest)=>{
             }
         })
 
-        
-        
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
