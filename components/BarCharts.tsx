@@ -75,8 +75,7 @@ const BarCharts = (props: Props) => {
           <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="category" angle={-20} fontSize={10} textAnchor='end' interval={0} tickFormatter={formatXAxis} className='text-xs w-full' />
           <YAxis tick={CustomYAxisTick}/>
-          <Tooltip wrapperStyle={{backgroundColor:"#BB0D32"}} cursorStyle={{stroke:"#BB0D32"}} />
-          {/* <Legend className='bg-black' /> */}
+          <Tooltip wrapperStyle={{backgroundColor:"#BB0D32"}} cursorStyle={{stroke:"#BB0D32"}} contentStyle={{ color: "#000" }} />
           <Bar dataKey="expense" fill="#BB0D32"     />
         </BarChart>
       </ResponsiveContainer>

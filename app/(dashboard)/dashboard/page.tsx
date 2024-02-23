@@ -26,7 +26,7 @@ const Dashboard = () => {
         <div className='w-full md:w-2/3 bg-background rounded-lg '>
         <Chart />
         </div>
-        <div className='border border-slate-200 rounded-md bg-background h-[350px] md:h-full w-full md:w-1/3 pt-2'>
+        <div className='border rounded-md bg-background h-[350px] md:h-full w-full md:w-1/3 pt-2'>
           <RecentActivities/>
         </div>
         </section>

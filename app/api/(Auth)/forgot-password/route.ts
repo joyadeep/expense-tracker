@@ -34,18 +34,18 @@ export const POST = async(req:NextRequest)=>{
             }
         });
         
-    //    await transporter.sendMail({
-    //         from: 'dev.joyadeep@gmail.com',
-    //         to: email,
-    //         subject: 'Reset password',
-    //         html: `
-    //         <p>Hello,</p>
-    //         <p>We received a request to reset your password. If you initiated this request, please click on the link below to reset your password. This link is valid for 24 hours.</p>
-    //         <a href=${link}>Reset Password</a>
-    //         <p>If you did not request a password reset, you can safely ignore this email.</p>
-    //         <p>Please note that this link will expire after 24 hours. If you're unable to click the link, please copy and paste it into your browser's address bar.</p>
-    //     `,
-    //     })
+       await transporter.sendMail({
+            from: 'dev.joyadeep@gmail.com',
+            to: email,
+            subject: 'Reset password',
+            html: `
+            <p>Hello,</p>
+            <p>We received a request to reset your password. If you initiated this request, please click on the link below to reset your password. This link is valid for 24 hours.</p>
+            <a href=${link}>Reset Password</a>
+            <p>If you did not request a password reset, you can safely ignore this email.</p>
+            <p>Please note that this link will expire after 24 hours. If you're unable to click the link, please copy and paste it into your browser's address bar.</p>
+        `,
+        })
 
         return NextResponse.json({message:"please check your email",data:link},{status:200})
     } catch (error) {

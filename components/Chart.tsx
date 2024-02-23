@@ -54,7 +54,7 @@ const Chart =()=> {
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" tick={{ fontSize: 10}} />
           <YAxis tick={CustomYAxisTick}  />
-          <Tooltip />
+          <Tooltip contentStyle={{ color: "#000" }} />
           <defs>
       <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
         <stop offset="10%" stopColor="#9A0928" stopOpacity={0.8} />
