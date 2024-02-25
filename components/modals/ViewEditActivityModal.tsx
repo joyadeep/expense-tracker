@@ -58,7 +58,7 @@ const ViewEditActivityModal = () => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
-    <DialogContent className="sm:max-w-[500px]" onOpenAutoFocus={(e) => e.preventDefault()} >
+    <DialogContent className="sm:max-w-[500px]" onOpenAutoFocus={(e) => e.preventDefault()} onInteractOutside={(e)=>{e.preventDefault()}} onEscapeKeyDown={(e)=>{e.preventDefault()}} >
       <DialogHeader>
         <DialogTitle>{mode} Expense</DialogTitle>
         {/* <DialogDescription>Add your expenses to store in database. </DialogDescription> */}

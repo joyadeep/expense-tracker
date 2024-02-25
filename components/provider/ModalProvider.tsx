@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 import AddActivityModal from "../modals/AddActivityModal";
 import ViewEditActivityModal from "../modals/ViewEditActivityModal";
+import DeleteAccountModal from "../modals/DeleteAccountModal";
 
 type Props = {}
 
@@ -20,6 +21,7 @@ const ModalProvider = (props: Props) => {
     <>
       <AddActivityModal/>
       <ViewEditActivityModal />
+      <DeleteAccountModal/>
     </>
   )
 }

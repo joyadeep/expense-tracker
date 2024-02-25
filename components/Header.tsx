@@ -46,8 +46,8 @@ const Header = ({toggleOpen,toggleMobileOpen}:IHeader) => {
             </DropdownMenuTrigger>
             <DropdownMenuContent>
               <DropdownMenuGroup>
-                <DropdownMenuItem className="cursor-pointer"> <UserRound className="mr-2 h-4 w-4"/> Profile</DropdownMenuItem>
-                <DropdownMenuItem className="cursor-pointer"> <Settings className="mr-2 h-4 w-4" /> Settings</DropdownMenuItem>
+                <DropdownMenuItem className="cursor-pointer" onClick={() => router.push("/profile")}> <UserRound className="mr-2 h-4 w-4"/> Profile</DropdownMenuItem>
+                {/* <DropdownMenuItem className="cursor-pointer"> <Settings className="mr-2 h-4 w-4" /> Settings</DropdownMenuItem> */}
                 <DropdownMenuItem className="cursor-pointer" onClick={handleLogout}> <LogOut className="mr-2 h-4 w-4" /> Logout</DropdownMenuItem>
               </DropdownMenuGroup>
             </DropdownMenuContent>

@@ -54,7 +54,7 @@ const AddActivityModal = () => {
   
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
-    <DialogContent className="sm:max-w-[500px]">
+    <DialogContent className="sm:max-w-[500px]" onInteractOutside={(e)=>{e.preventDefault()}} onEscapeKeyDown={(e)=>{e.preventDefault()}}>
       <DialogHeader>
         <DialogTitle>Add Expense</DialogTitle>
         <DialogDescription>Add your expenses to store in database. </DialogDescription>

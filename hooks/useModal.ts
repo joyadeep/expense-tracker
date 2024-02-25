@@ -1,6 +1,6 @@
 import {create} from 'zustand'
 
-export type ModalType= "Add Activity" | "ViewEdit Activity"
+export type ModalType= "Add Activity" | "ViewEdit Activity" | "Delete Account"
 
 interface ModalData{
 }
