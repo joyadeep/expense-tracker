@@ -30,7 +30,8 @@ const Sidenav = ({isOpen}:{isOpen:boolean}) => {
               isOpen? "rounded-full" : "rounded-md justify-center gap-0 transition-all duration-500"
               )
             
-            }>{nav.icon} 
+            }>
+              <span>{nav.icon}</span> 
             <span className={`overflow-hidden transition-all opacity-100 ${isOpen?"w-full ":"w-0 opacity-0 duration-700"}`}>{nav.title}</span> 
              </Link>
             </TooltipAction>
