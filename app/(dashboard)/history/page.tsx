@@ -16,9 +16,7 @@ const ITEMS_PER_PAGE=10;
 
 const Report = () => {
     const [page,setPage]=useState(1);
-    const {data,isLoading,error}= useSWR<any>(["history",page],()=>fetcher(`/api/activity/user/${localStorage.getItem("userId")}?pageNumber=${page}`),{
-        errorRetryCount:1,
-    })
+    const {data,isLoading,error}= useSWR<any>(["history",page],()=>fetcher(`/api/activity/user/${localStorage.getItem("userId")}?pageNumber=${page}`))
     
     const history:Activity[]=data?.data;
     const {onOpen}=useModal();

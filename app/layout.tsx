@@ -4,6 +4,7 @@ import "./globals.css";
 import ModalProvider from "@/components/provider/ModalProvider";
 import {Toaster} from "sonner"
 import ThemeProvider from "@/components/provider/ThemeProvider";
+import SWRProvider from "@/components/provider/SWRProvider";
 const poppins = Poppins({style:"normal", weight:["400","500","600","700","800","900"], subsets:["latin"]});
 
 export const metadata: Metadata = {
@@ -20,7 +21,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={poppins.className}>
         <ThemeProvider attribute="class" defaultTheme="light" disableTransitionOnChange>
+          <SWRProvider>
         {children}
+          </SWRProvider>
         <ModalProvider/>
         <Toaster richColors />
         </ThemeProvider>
