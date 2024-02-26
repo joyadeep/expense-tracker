@@ -1,6 +1,6 @@
 import { usePathname } from "next/navigation";
 import { Sheet, SheetContent } from "./ui/sheet"
-import { Banknote, BedSingle, LayoutGrid } from "lucide-react";
+import { History, LayoutGrid } from "lucide-react";
 import Link from "next/link";
 import { twMerge } from "tailwind-merge";
 
@@ -19,7 +19,7 @@ const MobileSidenav = ({isOpen,toggleOpen}:IMobileSidenav) => {
       },
       {
         title:"History",
-        icon:<BedSingle size={18} />,
+        icon:<History size={18} />,
         href:"/history"
       }
     ]
