@@ -4,17 +4,15 @@ import React, { useEffect, useState } from 'react'
 import { XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area } from 'recharts';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { currencyShorter } from '@/lib/currency';
+import useSWR from 'swr';
+import { fetcher } from '@/lib/fetcher';
 // TODO : DayType is not accessible
 
 
 const Chart =()=> {
-  const {isLoading,yearlyGraph,getYearlyGraph,dailyGraph} = useGraph();
   const [time,setTime]=useState("DAILY")
-  useEffect(()=>{
-    if (yearlyGraph.length === 0 || dailyGraph.length === 0) {
-      getYearlyGraph(time)
-    }
-  },[time])
+  const {data} = useSWR<any>(["chart",time],()=>fetcher(`/api/graph/${localStorage.getItem("userId")}?time=${time}`))
+  const chart=data?.data;
 
   const CustomYAxisTick = (props:any) => {
     const { x, y, payload } = props;
@@ -47,7 +45,7 @@ const Chart =()=> {
     </div>
      <ResponsiveContainer width="100%" height="95%" >
      <AreaChart
-          data={time === "DAILY"? dailyGraph : yearlyGraph}
+          data={chart}
           margin={{ top: 0, right: 0, left: -10, bottom: 0}}
           className='pb-3 md:pb-0'
         >

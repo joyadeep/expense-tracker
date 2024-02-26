@@ -14,6 +14,8 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectVa
 import { useActivity } from '@/hooks/useActivity'
 import { categoryConstant,categories } from '@/constants/CategoryConstant'
 import { formSchema } from '@/schama/ActivitySchama'
+import { fetcher } from '@/lib/fetcher'
+import { mutate } from 'swr'
 
 // TODO : when activity is added all other pages should be refetched.
 
@@ -22,8 +24,6 @@ import { formSchema } from '@/schama/ActivitySchama'
 const AddActivityModal = () => {
 
   const {isOpen,onClose,type,data} = useModal();
-  const {addActivity}=useActivity();
-
   const form = useForm({
     resolver:zodResolver(formSchema),
     defaultValues:{
@@ -38,11 +38,12 @@ const AddActivityModal = () => {
 
   const onSubmit = async(values:z.infer<typeof formSchema>)=>{
     try {
-      console.log(values);
       const activityData= {...values,userId:localStorage.getItem("userId")};
-      
-      await addActivity(activityData);
-      
+      await fetcher(`/api/activity`,{method:"POST",data:activityData})
+      mutate("/api/activity");
+      mutate("expenses/overview");
+      mutate("chart");
+      mutate("expenses/bargraph");
       toast.success("Activity added successfully");
       onClose();
       form.reset();

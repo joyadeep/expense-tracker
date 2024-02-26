@@ -1,24 +1,21 @@
 "use client"
 import { currencyFormat } from '@/lib/currency'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Button } from './ui/button'
 import TooltipAction from './TooltipAction'
 import Link from 'next/link'
 import { useModal } from '@/hooks/useModal'
-import { useActivity } from '@/hooks/useActivity'
 import { Skeleton } from './ui/skeleton'
 import { categoryConstant } from '@/constants/CategoryConstant'
 import { Plus } from 'lucide-react'
-
+import useSWR from 'swr';
+import { fetcher } from '@/lib/fetcher'
+import { Activity } from '@prisma/client'
 
 const RecentActivities = () => {
-  const {data,getActivity,error,isLoading}=useActivity();
   const {onOpen} = useModal()
-  useEffect(()=>{
-    if(data?.length === 0){
-        getActivity();
-    }
-  },[getActivity,data?.length])
+  const {data,error,isLoading}= useSWR<any>("/api/activity",fetcher)
+  const activities:Activity[] = data?.data;
   return (
     <div className=' h-full relative overflow-hidden flex flex-col'>
         <div className='px-5 flex justify-between items-center '>
@@ -42,7 +39,7 @@ const RecentActivities = () => {
         </div>
           ))
           :
-          data?.map((activity,index)=>(
+          activities?.map((activity,index)=>(
             <div key={index} className='px-5 flex justify-between gap-5 items-center py-2  hover:bg-background/5 cursor-pointer'>
             <div className='flex justify-center items-center w-8 h-8 text-foreground  rounded-full bg-background/10'>
               {categoryConstant[activity.category]}

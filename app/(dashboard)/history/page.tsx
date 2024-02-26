@@ -7,19 +7,24 @@ import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from '@/c
 import { useActivity } from '@/hooks/useActivity';
 import { useModal } from '@/hooks/useModal';
 import { currencyFormat } from '@/lib/currency';
+import { fetcher } from '@/lib/fetcher';
+import { Activity } from '@prisma/client';
 import { useEffect, useState } from 'react';
+import useSWR from 'swr';
 
 const Report = () => {
     const {pagedData,getPagedActivity}= useActivity();
     const [page,setPage]=useState(1);
-    useEffect(()=>{
-        if(pagedData.data.length === 0){
-            getPagedActivity(1);
-        }
-        else {
-            getPagedActivity(page)
-        }
-    },[page])
+    const {data}= useSWR<{currentPage:number,totalPages:number,data:Activity[]}>(`/api/activity/user/${localStorage.getItem("userId")}?pageNumber=${page}`,fetcher)
+    console.log("data ====",data);
+    // useEffect(()=>{
+    //     if(pagedData.data.length === 0){
+    //         getPagedActivity(1);
+    //     }
+    //     else {
+    //         getPagedActivity(page)
+    //     }
+    // },[page])
 
     const {onOpen}=useModal();
 
@@ -44,7 +49,7 @@ const Report = () => {
             </TableHeader>
             <TableBody>
                 {
-                    pagedData?.data?.map((expense,index)=>(
+                    data?.data?.map((expense,index)=>(
                         <TableRow key={expense.id}>
                             <TableCell>{index+1}</TableCell>
                             <TableCell>{expense.title}</TableCell>
@@ -63,7 +68,7 @@ const Report = () => {
                 }
             </TableBody>
         </Table>
-        <Paginate currentPage={pagedData.currentPage} totalPages={pagedData.totalPages} onPageChange={onPageChange} />
+        <Paginate currentPage={data?.currentPage as number} totalPages={data?.totalPages as number} onPageChange={onPageChange} />
         
         </div>
   )

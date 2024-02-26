@@ -1,10 +1,11 @@
 "use client"
 import React, { useEffect, useState } from 'react'
-import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, CartesianGrid } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from './ui/select';
-import { useBarGraph } from '@/hooks/useBarGraph';
 import { Category } from '@prisma/client';
 import { currencyShorter } from '@/lib/currency';
+import useSWR from 'swr';
+import { fetcher } from '@/lib/fetcher';
 
 type Props = {}
 export const shortCategories = {
@@ -44,12 +45,7 @@ const CustomYAxisTick = (props:any) => {
 
 const BarCharts = (props: Props) => {
   const [time,setTime]=useState("MONTH")
-  const {isLoading,error,getBargraph,monthBarGraph,yearBarGraph} = useBarGraph();
-  useEffect(()=>{
-    if (yearBarGraph.length === 0 || monthBarGraph.length === 0) {
-      getBargraph(time)
-    }
-  },[time])
+  const {data} = useSWR<any>("expenses/bargraph",()=>fetcher(`/api/bargraph/${localStorage.getItem("userId")}?time=${time}`))
   return (
     <div className='w-full md:w-2/3 h-[450px] border rounded-lg p-1 md:p-5'>
     <div className='flex justify-between items-center'>
@@ -69,7 +65,7 @@ const BarCharts = (props: Props) => {
       </div>
     </div>
     <ResponsiveContainer width="100%" height="100%">
-        <BarChart className=' pb-14 md:pb-0'  height={500} data={time === "MONTH" ? monthBarGraph : yearBarGraph}
+        <BarChart className=' pb-14 md:pb-0'  height={500} data={data?.data}
         margin={{ top: 0, right: 0, left: -10, bottom: 0}}
         >
           <CartesianGrid strokeDasharray="3 3" />

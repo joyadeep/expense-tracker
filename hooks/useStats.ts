@@ -2,7 +2,7 @@ import  axiosInstance  from '@/lib/axiosInstance';
 import axios from 'axios';
 import {create} from 'zustand'
 //TODO : create middleware to check if token is really added.
-interface Istat{
+export interface Istat{
     totalExpenses:number;
     currentMonthExpense:number;
     lastMonthExpense:number;
