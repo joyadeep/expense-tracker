@@ -13,18 +13,11 @@ import { useEffect, useState } from 'react';
 import useSWR from 'swr';
 
 const Report = () => {
-    const {pagedData,getPagedActivity}= useActivity();
     const [page,setPage]=useState(1);
-    const {data}= useSWR<{currentPage:number,totalPages:number,data:Activity[]}>(`/api/activity/user/${localStorage.getItem("userId")}?pageNumber=${page}`,fetcher)
-    console.log("data ====",data);
-    // useEffect(()=>{
-    //     if(pagedData.data.length === 0){
-    //         getPagedActivity(1);
-    //     }
-    //     else {
-    //         getPagedActivity(page)
-    //     }
-    // },[page])
+    const {data}= useSWR<any>(["history",page],()=>fetcher(`/api/activity/user/${localStorage.getItem("userId")}?pageNumber=${page}`))
+    
+    const history:Activity[]=data?.data;
+    
 
     const {onOpen}=useModal();
 
@@ -49,7 +42,7 @@ const Report = () => {
             </TableHeader>
             <TableBody>
                 {
-                    data?.data?.map((expense,index)=>(
+                    history?.map((expense,index)=>(
                         <TableRow key={expense.id}>
                             <TableCell>{index+1}</TableCell>
                             <TableCell>{expense.title}</TableCell>
@@ -68,7 +61,7 @@ const Report = () => {
                 }
             </TableBody>
         </Table>
-        <Paginate currentPage={data?.currentPage as number} totalPages={data?.totalPages as number} onPageChange={onPageChange} />
+        <Paginate currentPage={data?.currentPage} totalPages={data?.totalPages} onPageChange={onPageChange} />
         
         </div>
   )

@@ -1,4 +1,4 @@
-import {Banknote, BedSingle, LayoutGrid} from 'lucide-react';
+import {History, LayoutGrid} from 'lucide-react';
 import {usePathname} from 'next/navigation';
 import { twMerge } from 'tailwind-merge';
 import TooltipAction from './TooltipAction';
@@ -13,7 +13,7 @@ const Sidenav = ({isOpen}:{isOpen:boolean}) => {
     },
     {
       title:"History",
-      icon:<BedSingle size={18} />,
+      icon:<History size={18} />,
       href:"/history"
     }
   ]
