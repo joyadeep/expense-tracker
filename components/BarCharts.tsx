@@ -6,6 +6,7 @@ import { Category } from '@prisma/client';
 import { currencyShorter } from '@/lib/currency';
 import useSWR from 'swr';
 import { fetcher } from '@/lib/fetcher';
+import Error from './Error';
 
 type Props = {}
 export const shortCategories = {
@@ -45,7 +46,9 @@ const CustomYAxisTick = (props:any) => {
 
 const BarCharts = (props: Props) => {
   const [time,setTime]=useState("MONTH")
-  const {data} = useSWR<any>("expenses/bargraph",()=>fetcher(`/api/bargraph/${localStorage.getItem("userId")}?time=${time}`))
+  const {data,isLoading,error} = useSWR<any>("expenses/bargraph",()=>fetcher(`/api/bargraph/${localStorage.getItem("userId")}?time=${time}`))
+
+ 
   return (
     <div className='w-full md:w-2/3 h-[450px] border rounded-lg p-1 md:p-5'>
     <div className='flex justify-between items-center'>
@@ -64,7 +67,9 @@ const BarCharts = (props: Props) => {
       </Select>
       </div>
     </div>
-    <ResponsiveContainer width="100%" height="100%">
+    {
+      error ? <Error message={error.message} /> :
+      <ResponsiveContainer width="100%" height="100%">
         <BarChart className=' pb-14 md:pb-0'  height={500} data={data?.data}
         margin={{ top: 0, right: 0, left: -10, bottom: 0}}
         >
@@ -75,6 +80,8 @@ const BarCharts = (props: Props) => {
           <Bar dataKey="expense" fill="#BB0D32"     />
         </BarChart>
       </ResponsiveContainer>
+    }
+
       </div>
   )
 }

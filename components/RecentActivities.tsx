@@ -11,10 +11,11 @@ import { Plus } from 'lucide-react'
 import useSWR from 'swr';
 import { fetcher } from '@/lib/fetcher'
 import { Activity } from '@prisma/client'
+import Error from './Error'
 
 const RecentActivities = () => {
   const {onOpen} = useModal()
-  const {data,error,isLoading}= useSWR<any>("/api/activity",fetcher)
+  const {data,error,isLoading}= useSWR<any>("getActivity",()=>fetcher(`/api/activity/user/${localStorage.getItem("userId")}`))
   const activities:Activity[] = data?.data;
   return (
     <div className=' h-full relative overflow-hidden flex flex-col'>
@@ -26,7 +27,7 @@ const RecentActivities = () => {
         </div>
         <div className='flex-1 overflow-hidden after:absolute after:bottom-7 after:left-0 after:w-full after:h-[80px] z-20 after:bg-gradient-to-t after:from-background/80'>
           {error ? 
-          <p className='text-center text-foreground/60 text-sm mt-10'>{error}</p> 
+          <Error message={error.message} hideIcon />
           :isLoading ? 
           Array.from({length:7}).map((_,index)=>(
             <div key={index} className='px-5 flex justify-between gap-5 items-center py-2'>

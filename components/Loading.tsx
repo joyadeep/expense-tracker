@@ -5,7 +5,9 @@ type Props = {}
 
 const Loading = (props: Props) => {
   return (
-    <Image src={"/images/loading.svg"} alt='loading' width={200} height={200} className='animate-spin ' />
+    <div className='w-full h-full flex items-center justify-center'>
+      <Image src={"/images/loading.svg"} alt='loading' width={200} height={200} className='animate-spin ' />
+    </div>
   )
 }
 

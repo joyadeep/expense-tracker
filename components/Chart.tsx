@@ -6,12 +6,14 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectVa
 import { currencyShorter } from '@/lib/currency';
 import useSWR from 'swr';
 import { fetcher } from '@/lib/fetcher';
+import Loading from './Loading';
+import Error from './Error';
 // TODO : DayType is not accessible
 
 
 const Chart =()=> {
   const [time,setTime]=useState("DAILY")
-  const {data} = useSWR<any>(["chart",time],()=>fetcher(`/api/graph/${localStorage.getItem("userId")}?time=${time}`))
+  const {data,isLoading,error} = useSWR<any>(["chart",time],()=>fetcher(`/api/graph/${localStorage.getItem("userId")}?time=${time}`))
   const chart=data?.data;
 
   const CustomYAxisTick = (props:any) => {
@@ -43,25 +45,28 @@ const Chart =()=> {
       </Select>
       </div>
     </div>
-     <ResponsiveContainer width="100%" height="95%" >
-     <AreaChart
-          data={chart}
-          margin={{ top: 0, right: 0, left: -10, bottom: 0}}
-          className='pb-3 md:pb-0'
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" tick={{ fontSize: 10}} />
-          <YAxis tick={CustomYAxisTick}  />
-          <Tooltip contentStyle={{ color: "#000" }} />
-          <defs>
-      <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="10%" stopColor="#9A0928" stopOpacity={0.8} />
-        <stop offset="95%" stopColor="#FB0036" stopOpacity={0} />
-      </linearGradient>
-    </defs>
-          <Area type="monotone" dataKey="expense" stroke="#BB0D32" fill="url(#colorUv)" />
-        </AreaChart>
-  </ResponsiveContainer>
+    {
+      error ? <Error message={error?.message} /> :
+      <ResponsiveContainer width="100%" height="95%" >
+      <AreaChart
+           data={chart}
+           margin={{ top: 0, right: 0, left: -10, bottom: 0}}
+           className='pb-3 md:pb-0'
+         >
+           <CartesianGrid strokeDasharray="3 3" />
+           <XAxis dataKey="name" tick={{ fontSize: 10}} />
+           <YAxis tick={CustomYAxisTick}  />
+           <Tooltip contentStyle={{ color: "#000" }} />
+           <defs>
+       <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+         <stop offset="10%" stopColor="#9A0928" stopOpacity={0.8} />
+         <stop offset="95%" stopColor="#FB0036" stopOpacity={0} />
+       </linearGradient>
+     </defs>
+           <Area type="monotone" dataKey="expense" stroke="#BB0D32" fill="url(#colorUv)" />
+         </AreaChart>
+   </ResponsiveContainer>
+    }
    </div>
   )
 }

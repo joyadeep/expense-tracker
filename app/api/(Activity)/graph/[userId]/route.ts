@@ -40,6 +40,10 @@ const getMonthlyData= async(params:any)=>{
         expense,
       }));
 
+    if (monthlyTotals.length <=0){
+        return NextResponse.json({message:"No data found"},{status:404})
+    }
+
     return NextResponse.json({message:"success",data:monthlyTotals},{status:200})
 }
 
@@ -62,6 +66,10 @@ const getDailyData= async(params:any)=>{
         name,
         expense
     }))
+
+    if(dailyTotals.length <=0){
+        return NextResponse.json({message:"No data found"},{status:404})
+    }
 
     return NextResponse.json({message:"success",data:dailyTotals},{status:200})
 }

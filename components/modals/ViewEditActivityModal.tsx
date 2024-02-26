@@ -13,6 +13,8 @@ import * as z from 'zod'
 import { categories, categoryConstant } from '@/constants/CategoryConstant'
 import axiosInstance from '@/lib/axiosInstance'
 import { toast } from 'sonner'
+import { fetcher } from '@/lib/fetcher'
+import { mutate } from 'swr'
 
 interface Ivieweditactivity {
     type:"View" | "Edit";
@@ -31,7 +33,7 @@ const ViewEditActivityModal = () => {
         }
       })
     const  isModalOpen = isOpen && type === "ViewEdit Activity";
-    const {mode,expenseData} = data;
+    const {mode,expenseData,page} = data;
 
     useEffect(()=>{
       if(expenseData){
@@ -44,14 +46,13 @@ const ViewEditActivityModal = () => {
     const isLoading = form.formState.isSubmitting;
 
     const onSubmit = async(values:z.infer<typeof formSchema>)=>{
-        const response = await axiosInstance.put(`/api/activity/${expenseData.id}`,values);
-
-        if (response.status!==200) {
-            toast.error(response.data?.message)
-        }
-        else {
-          toast.success(response.data?.message);
-          onClose();
+        try {
+        const response:any = await fetcher(`/api/activity/${expenseData.id}`,{method:"PUT",data:values});
+        onClose();
+        mutate(["history",page])
+        toast.success(response?.message)
+        } catch (error:any) {
+          toast.error(error?.message)
         }
     }
 
@@ -61,7 +62,6 @@ const ViewEditActivityModal = () => {
     <DialogContent className="sm:max-w-[500px]" onOpenAutoFocus={(e) => e.preventDefault()} onInteractOutside={(e)=>{e.preventDefault()}} onEscapeKeyDown={(e)=>{e.preventDefault()}} >
       <DialogHeader>
         <DialogTitle>{mode} Expense</DialogTitle>
-        {/* <DialogDescription>Add your expenses to store in database. </DialogDescription> */}
       </DialogHeader>
         <Form {...form} >
         <form  onSubmit={form.handleSubmit(onSubmit)}>

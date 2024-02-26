@@ -49,8 +49,8 @@ const Paginate = ({currentPage,totalPages,onPageChange}:Ipagination) => {
                 </PaginationItem>
               {
                 pageNumbers.map((page,index)=>(
-                    <PaginationItem key={index}>
-                        <PaginationLink 
+                    <PaginationItem key={index} className='cursor-pointer ' >
+                        <PaginationLink isActive={page===currentPage} 
                         onClick={()=>onPageChange(index+1)}
                         >{page}</PaginationLink>
                     </PaginationItem>

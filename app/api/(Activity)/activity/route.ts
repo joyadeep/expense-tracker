@@ -1,15 +1,7 @@
 import { db } from "@/lib/db"
-import { NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
 
-export const GET = async(req:Request)=>{
-    try {
-        const response = await db.activity.findMany({orderBy:{createdAt:"desc"}});
-        return NextResponse.json({message:"success",data:response},{status:200})
-    } catch (error) {
-        return NextResponse.json({message:"Something went wrong"},{status:500})
-    }
-}
-
+// CREATE new Activity
 export const POST = async(req:Request)=>{
     try {
         const {title,amount,category,userId}=await req.json();

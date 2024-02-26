@@ -1,30 +1,40 @@
 "use client"
 import OptionDrawer from '@/components/Drawer';
+import Error from '@/components/Error';
 import PageHeading from '@/components/Heading'
+import Loading from '@/components/Loading';
 import Paginate from '@/components/Paginate';
-import { Button } from '@/components/ui/button';
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from '@/components/ui/table'
-import { useActivity } from '@/hooks/useActivity';
 import { useModal } from '@/hooks/useModal';
 import { currencyFormat } from '@/lib/currency';
 import { fetcher } from '@/lib/fetcher';
 import { Activity } from '@prisma/client';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import useSWR from 'swr';
+
+const ITEMS_PER_PAGE=10;
 
 const Report = () => {
     const [page,setPage]=useState(1);
-    const {data}= useSWR<any>(["history",page],()=>fetcher(`/api/activity/user/${localStorage.getItem("userId")}?pageNumber=${page}`))
+    const {data,isLoading,error}= useSWR<any>(["history",page],()=>fetcher(`/api/activity/user/${localStorage.getItem("userId")}?pageNumber=${page}`),{
+        errorRetryCount:1,
+    })
     
     const history:Activity[]=data?.data;
-    
-
     const {onOpen}=useModal();
-
 
     const onPageChange =(page:number)=>{
         setPage(page);
     }
+
+
+    if(isLoading){
+        return <Loading/>
+    }
+    if(error){
+        return <Error message={error?.message}/>
+    }
+    
 
   return (
         <div className='pb-10 md:pb-0'>
@@ -44,7 +54,7 @@ const Report = () => {
                 {
                     history?.map((expense,index)=>(
                         <TableRow key={expense.id}>
-                            <TableCell>{index+1}</TableCell>
+                            <TableCell>{(data?.currentPage-1)* ITEMS_PER_PAGE+index+1}</TableCell>
                             <TableCell>{expense.title}</TableCell>
                             <TableCell className='text-xs font-medium'>{expense.category}</TableCell>
                             <TableCell className='font-semibold text-right'>{currencyFormat(expense.amount)}</TableCell>
@@ -54,7 +64,7 @@ const Report = () => {
                             </TableCell>
                             <TableCell className='hidden md:flex gap-3'>
                                 <p className='cursor-pointer' onClick={()=>{onOpen("ViewEdit Activity",{mode:"View",expenseData:expense})}} >view</p>
-                                <p className='cursor-pointer' onClick={()=>{onOpen("ViewEdit Activity",{mode:"Edit",expenseData:expense})}}>edit</p>
+                                <p className='cursor-pointer' onClick={()=>{onOpen("ViewEdit Activity",{mode:"Edit",expenseData:expense,page:page})}}>edit</p>
                             </TableCell>
                         </TableRow>
                     ))
