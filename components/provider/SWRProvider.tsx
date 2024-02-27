@@ -6,8 +6,8 @@ type Props = {}
 const SWRProvider = ({children}:{children:ReactNode}) => {
   return (
     <SWRConfig value={{
-        errorRetryInterval:0,
-        errorRetryCount:3,
+        errorRetryInterval:3000,
+        errorRetryCount:1,
         revalidateOnFocus:false,
         revalidateOnReconnect:false
     }}>
