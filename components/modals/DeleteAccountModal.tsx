@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Dialog, DialogContent, DialogFooter, DialogHeader } from '../ui/dialog'
 import { Button } from '../ui/button'
 import { AlertTriangle } from 'lucide-react'
@@ -6,12 +6,15 @@ import { useModal } from '@/hooks/useModal'
 import { toast } from 'sonner'
 import axiosInstance from '@/lib/axiosInstance'
 import { useRouter } from 'next/navigation'
+import { Checkbox } from '../ui/checkbox'
+import { Label } from '../ui/label'
 
 type Props = {}
 
 const DeleteAccountModal = (props: Props) => {
     const {isOpen,onClose,type}= useModal();
     const route= useRouter();
+    const [isConfirmed,setIsConfirmed]=useState(false);
 
     const isModalOpen = isOpen && type === "Delete Account";
 
@@ -38,8 +41,12 @@ const DeleteAccountModal = (props: Props) => {
             </DialogHeader>
             <h3 className='text-foreground font-semibold text-md'>Are you sure you want to delete your account permanently?</h3>
             <h6 className='text-sm text-foreground'>Press &quot;Delete Account&quot; to remove it permanently, or &quot;Cancel&quot; if you want to keep your benefits. </h6>
+            <div className='flex items-center gap-2'>
+                <Checkbox id='confirm' onClick={()=>setIsConfirmed(!isConfirmed)} />
+                <Label>I understand that this action cannot be undone.</Label>
+            </div>
             <DialogFooter className='flex gap-3 flex-col '>
-                <Button variant={"outline"} size={"sm"} onClick={onSubmit}>Delete Account</Button>
+                <Button disabled={!isConfirmed} variant={"outline"} size={"sm"} onClick={onSubmit}>Delete Account</Button>
                 <Button variant={"primary"} size={"sm"} onClick={onClose}>Cancel</Button>
             </DialogFooter>
         </DialogContent>
