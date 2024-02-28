@@ -40,9 +40,10 @@ const AddActivityModal = () => {
     try {
       const activityData= {...values,userId:localStorage.getItem("userId")};
       await fetcher(`/api/activity`,{method:"POST",data:activityData})
-      mutate("/api/activity");
       mutate("expenses/overview");
-      mutate("chart");
+      mutate("getActivity");
+      mutate(["chart","DAILY"]);
+      mutate(["chart","MONTHLY"]);
       mutate("expenses/bargraph");
       toast.success("Activity added successfully");
       onClose();

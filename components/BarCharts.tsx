@@ -11,11 +11,11 @@ import Error from './Error';
 type Props = {}
 export const shortCategories = {
     HOUSING_EXPENSES: "Housing",
-    TRANSPORTATION_COSTS: "Transportation",
+    TRANSPORTATION_COSTS: "Transport..",
     FOOD_AND_DINING: "Food",
     HEALTHCARE: "Health",
     UTILITIES: "Utils",
-    ENTERTAINMENT: "Entertainment",
+    ENTERTAINMENT: "Entert..",
     PERSONAL_CARE: "Personal",
     EDUCATION: "Education",
     DEBTS_AND_LOANS: "Debts",
