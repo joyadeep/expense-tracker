@@ -41,11 +41,13 @@ const Paginate = ({currentPage,totalPages,onPageChange}:Ipagination) => {
       }
       pageNumbers.push(totalPages);
     }
+
+
   return (
     <Pagination className='mt-5 pb-5'>
             <PaginationContent className=' w-fit ml-auto'>
                 <PaginationItem className='cursor-pointer'>
-                    <PaginationPrevious onClick={()=>onPageChange(currentPage-1)} />
+                    <PaginationPrevious onClick={()=>{currentPage>1&&onPageChange(currentPage-1)}} />
                 </PaginationItem>
               {
                 pageNumbers.map((page,index)=>(
@@ -57,7 +59,7 @@ const Paginate = ({currentPage,totalPages,onPageChange}:Ipagination) => {
                 ))
               }
         <PaginationItem className='cursor-pointer'>
-          <PaginationNext onClick={()=>onPageChange(currentPage+1)}  />
+          <PaginationNext onClick={()=>{currentPage<totalPages&&onPageChange(currentPage+1)}}  />
         </PaginationItem>
             </PaginationContent>
         </Pagination>
