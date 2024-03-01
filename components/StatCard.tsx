@@ -1,5 +1,6 @@
 import React from 'react'
 import { currencyFormat } from '@/lib/currency';
+import { cn } from '@/lib/utils';
 
 interface Istatcard {
     icon:React.ReactElement;
@@ -16,7 +17,7 @@ const StatCard = ({icon,title,amount,flux}:Istatcard) => {
          <div className='text-foreground/70'>{icon}</div>
          </div>
           <p className='text-2xl font-bold'>{currencyFormat(amount ?? 0)}</p>
-          <small className='text-xs'>{flux && `${flux} % from last month`}</small>
+          <small className={cn('text-xs',flux && flux < 0 ? 'text-green-500' : 'text-red-500')}>{flux && `${flux} % from last month`}</small>
           {/* // TODO : add icon and color also add + for positive */}
     </div>
   )

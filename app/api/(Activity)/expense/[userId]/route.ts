@@ -42,7 +42,7 @@ try {
         difference=null
     }
     else {
-        difference =((thisMonthExpense?._sum?.amount ?? 0) -( lastMonthExpense?._sum?.amount  ?? 0)) / (lastMonthExpense?._sum?.amount  ?? 0) * 100
+        difference =(((thisMonthExpense?._sum?.amount ?? 0) -( lastMonthExpense?._sum?.amount  ?? 0)) / (lastMonthExpense?._sum?.amount  ?? 0) * 100).toFixed(2)
     }
     
     return NextResponse.json({message:"success",data:{totalExpenses:totalExpense._sum.amount, currentMonthExpense:thisMonthExpense._sum.amount,lastMonthExpense:lastMonthExpense._sum.amount,difference:difference}},{status:200})
