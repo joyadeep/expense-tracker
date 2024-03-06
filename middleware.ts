@@ -17,6 +17,7 @@ export async function middleware (request:NextRequest) {
     )
 
     if(path.startsWith("/api")) {
+       
         if(isPublicRoute){
             return NextResponse.next();
         }
