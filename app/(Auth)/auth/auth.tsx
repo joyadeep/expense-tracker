@@ -14,7 +14,7 @@ const AuthComponent = () => {
               field_type ==="register" ?<Register/> : <Login/>
             }
         </div>
-        <div className="flex-[2] hidden md:flex justify-center items-center bg-sky-100">
+        <div className="flex-[2] hidden md:flex justify-center items-center bg-sky-100 dark:bg-stone-900">
             <AuthCarousel/>
         </div>
     </div>

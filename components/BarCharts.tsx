@@ -46,7 +46,7 @@ const CustomYAxisTick = (props:any) => {
 
 const BarCharts = (props: Props) => {
   const [time,setTime]=useState("MONTH")
-  const {data,isLoading,error} = useSWR<any>("expenses/bargraph",()=>fetcher(`/api/bargraph/${localStorage.getItem("userId")}?time=${time}`))
+  const {data,isLoading,error} = useSWR<any>(["bargraph",time],()=>fetcher(`/api/bargraph/${localStorage.getItem("userId")}?time=${time}`))
 
  
   return (

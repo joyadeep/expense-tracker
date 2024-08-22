@@ -11,6 +11,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import Link from 'next/link';
 import { toast } from 'sonner';
+import PasswordInput from './PasswordInput';
 
 
 const formSchama = Z.object({
@@ -82,7 +83,7 @@ const Login = () => {
                         <FormMessage className='text-xs font-normal'/>
                         </div>
                         <FormControl>
-                            <Input type='password' placeholder='Enter password' {...field} />
+                            <PasswordInput field={field}/>
                         </FormControl>
                     </FormItem>
                     

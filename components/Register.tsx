@@ -10,6 +10,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import axios from 'axios'
 import { toast } from 'sonner'
 import {useRouter} from "next/navigation"
+import PasswordInput from './PasswordInput'
 
 
 const formSchama = Z.object({
@@ -97,7 +98,7 @@ function Register() {
                             <FormMessage className='text-xs font-normal'/>
                             </div>
                             <FormControl>
-                                <Input type='password' placeholder='Enter password' {...field} />
+                                <PasswordInput field={field}/>
                             </FormControl>
                         </FormItem>   
                         </div>
@@ -111,7 +112,7 @@ function Register() {
                             <FormMessage className='text-xs font-normal'/>
                             </div>
                             <FormControl>
-                                <Input type='password' placeholder='Reenter passowrd' {...field} />
+                                <PasswordInput field={field} placeholder='Reenter password'/>
                             </FormControl>
                         </FormItem>
                         </div>

@@ -5,7 +5,7 @@ import ModalProvider from "@/components/provider/ModalProvider";
 import {Toaster} from "sonner"
 import ThemeProvider from "@/components/provider/ThemeProvider";
 import SWRProvider from "@/components/provider/SWRProvider";
-const poppins = Poppins({style:"normal", weight:["400","500","600","700","800","900"], subsets:["latin"]});
+const poppins = Poppins({style:"normal", weight:["200","300","400","500","600","700","800","900"], subsets:["latin"]});
 
 export const metadata: Metadata = {
   title: "Paisa",
